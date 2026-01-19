@@ -13,13 +13,10 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
+    "plugins": [{ "name": "next" }],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./*"],
+      "@vscode-ftml/ftml-wasm": ["./node_modules/@vscode-ftml/ftml-wasm/esm/wj-ftml-wasm.mjs"]
     }
   },
   "include": [
@@ -28,7 +25,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts"
+    "@types/ftml-wasm.d.ts"
   ],
+  "typeRoots": ["./node_modules/@types", "./@types"],
   "exclude": ["node_modules"]
 }
