@@ -1,0 +1,20 @@
+@import url("https://fontsapi.zeoseven.com/161/main/result.css");
+
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --container-pc: 1200px;
+
+  --color-dark-bg: oklch(0.2746 0.0314 258.32);
+  --color-dark-bg-2: oklch(0.349 0.0243 255.68);
+
+  --color-border-1: oklch(0.4793 0.0265 248.38);
+
+  --color-blue-1: oklch(0.6843 0.1754 247.62);
+  --color-blue-2: oklch(0.7219 0.1534 246.6);
+}
+
+body {
+  font-family: var(--font-inter), "Sarasa Gothic SC", "sans-serif";
+}
