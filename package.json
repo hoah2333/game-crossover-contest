@@ -6,29 +6,34 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check"
   },
   "dependencies": {
-    "@hoah2333/wikidot-lib": "^0.0.6",
+    "@hoah2333/wikidot-lib": "^0.0.9",
     "@vscode-ftml/ftml-wasm": "1.28.1-2",
-    "html-react-parser": "^5.2.11",
-    "next": "16.1.3",
-    "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "cheerio": "^1.2.0",
+    "clsx": "^2.1.1",
+    "html-react-parser": "^6.1.4",
+    "lucide-react": "^1.24.0",
+    "next": "16.2.10",
+    "react": "19.2.7",
+    "react-dom": "19.2.7"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.18",
-    "@types/node": "^25.0.9",
-    "@types/react": "^19.2.8",
+    "@tailwindcss/postcss": "^4.3.2",
+    "@tailwindcss/typography": "^0.5.20",
+    "@types/node": "^26.1.1",
+    "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "babel-plugin-react-compiler": "1.0.0",
-    "eslint": "^9.39.2",
-    "eslint-config-next": "16.1.3",
-    "jiti": "^2.6.1",
-    "prettier": "^3.8.0",
-    "prettier-plugin-organize-imports": "^4.3.0",
-    "prettier-plugin-tailwindcss": "^0.7.2",
-    "tailwindcss": "^4.1.18",
-    "typescript": "^5.9.3"
+    "domhandler": "^6.0.1",
+    "oxfmt": "^0.59.0",
+    "oxlint": "^1.74.0",
+    "oxlint-tsgolint": "^0.24.0",
+    "tailwindcss": "^4.3.2",
+    "typescript": "^7.0.2"
   }
 }

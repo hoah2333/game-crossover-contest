@@ -1,0 +1,101 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "nextjs", "import", "jsx-a11y", "typescript", "unicorn", "oxc"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "error",
+    "pedantic": "error",
+    "perf": "error",
+    "style": "error",
+    "restriction": "off"
+  },
+  "options": { "typeAware": true, "typeCheck": true },
+  "env": { "builtin": true, "browser": true },
+  "ignorePatterns": [".next/**", "out/**", "build/**", "next-env.d.ts"],
+  "settings": {
+    "next": { "rootDir": "." },
+    "react": { "version": "19.2.7" },
+    "jsx-a11y": { "components": { "Image": "img" } }
+  },
+  "overrides": [
+    {
+      "files": ["**/*.d.ts"],
+      "rules": {
+        "import/group-exports": "off",
+        "import/no-mutable-exports": "off",
+        "import/no-named-export": "off",
+        "import/unambiguous": "off",
+        "max-params": "off",
+        "typescript/consistent-type-imports": "off"
+      }
+    },
+    {
+      "files": [
+        "app/**/{page,layout,loading,error,not-found,default,template,route}.{ts,tsx}",
+        "next.config.ts",
+        "postcss.config.mjs"
+      ],
+      "rules": {
+        "import/no-default-export": "off",
+        "import/no-named-export": "off",
+        "import/prefer-default-export": "off",
+        "react/only-export-components": "off"
+      }
+    }
+  ],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-no-target-blank": "off",
+    "react/no-unknown-property": "off",
+    "react/jsx-filename-extension": "off",
+    "react/jsx-max-depth": "off",
+    "react/forbid-component-props": "off",
+    "react/no-array-index-key": "error",
+    "react/exhaustive-deps": "error",
+    "react/only-export-components": ["error", { "allowConstantExport": true }],
+
+    "typescript/no-explicit-any": "error",
+    "typescript/no-non-null-assertion": "error",
+    "typescript/prefer-readonly-parameter-types": "off",
+    "typescript/consistent-type-imports": ["error", { "prefer": "type-imports", "fixStyle": "inline-type-imports" }],
+    "typescript/no-import-type-side-effects": "error",
+    "typescript/no-floating-promises": ["error", { "ignoreVoid": true }],
+
+    "import/no-default-export": "off",
+    "import/prefer-default-export": "off",
+    "import/no-named-export": "off",
+    "import/group-exports": "off",
+    "import/exports-last": "off",
+    "import/unambiguous": "off",
+    "import/no-unassigned-import": "off",
+    "import/no-anonymous-default-export": "error",
+    "import/no-cycle": "error",
+    "import/no-self-import": "error",
+    "import/no-duplicates": "error",
+
+    "unicorn/no-null": "off",
+    "unicorn/filename-case": ["error", { "cases": { "kebabCase": true, "camelCase": true, "pascalCase": true } }],
+
+    "oxc/no-async-await": "off",
+
+    "eslint/max-lines-per-function": "off",
+    "eslint/no-duplicate-imports": ["error", { "allowSeparateTypeImports": true }],
+
+    "sort-keys": "off",
+    "sort-imports": "off",
+    "id-length": "off",
+    "no-magic-numbers": "off",
+    "no-ternary": "off",
+    "no-undefined": "off",
+    "arrow-body-style": "off",
+    "new-cap": ["error", { "newIsCap": true, "capIsNew": false }],
+    "max-params": ["error", { "max": 5 }],
+    "no-console": "error",
+    "no-debugger": "error",
+    "no-shadow": "error",
+    "eqeqeq": ["error", "always", { "null": "ignore" }],
+    "curly": "error",
+    "no-var": "error",
+    "prefer-const": "error"
+  }
+}
