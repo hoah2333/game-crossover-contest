@@ -12,18 +12,19 @@
     "format:check": "oxfmt --check"
   },
   "dependencies": {
-    "@hoah2333/wikidot-lib": "^0.0.9",
+    "@hoah2333/wikidot-lib": "^0.0.11",
     "@vscode-ftml/ftml-wasm": "1.28.1-2",
     "cheerio": "^1.2.0",
     "clsx": "^2.1.1",
-    "html-react-parser": "^6.1.4",
-    "lucide-react": "^1.24.0",
+    "html-react-parser": "^6.1.5",
+    "lucide-react": "^1.25.0",
     "next": "16.2.10",
     "react": "19.2.7",
     "react-dom": "19.2.7"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.3.2",
+    "@svgr/webpack": "^8.1.0",
+    "@tailwindcss/postcss": "^4.3.3",
     "@tailwindcss/typography": "^0.5.20",
     "@types/node": "^26.1.1",
     "@types/react": "^19.2.17",
@@ -32,8 +33,9 @@
     "domhandler": "^6.0.1",
     "oxfmt": "^0.59.0",
     "oxlint": "^1.74.0",
-    "oxlint-tsgolint": "^0.24.0",
-    "tailwindcss": "^4.3.2",
+    "oxlint-tsgolint": "^0.25.0",
+    "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2"
-  }
+  },
+  "packageManager": "pnpm@11.14.0+sha512.66c1ac4c7d4762d6d7dde44c7f3e5a73591ed0a0806e751d4ed32d4f004f25b2285a906b1fd8a9e3e621df3b4e2858bf88e50e0cf626bedbe977fe434a5caf85"
 }
