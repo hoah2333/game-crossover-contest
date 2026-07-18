@@ -1,6 +1,6 @@
 import { wdModule } from "@hoah2333/wikidot-lib";
 import { useEffect, useState } from "react";
-import { useParseFTML } from "./ftml";
+import { useParseFtml } from "./useParseFtml";
 
 const siteDomain = "https://scp-wiki-cn.wikidot.com";
 
@@ -14,7 +14,7 @@ export const useGetSourceHtml = (sourcePage: string) => {
     });
   }, [sourcePage]);
 
-  const sourceHtml: string = useParseFTML(source);
+  const sourceHtml: string = useParseFtml(source);
 
   return sourceHtml;
 };

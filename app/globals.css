@@ -8,11 +8,20 @@
 
   --color-dark-bg: oklch(0.2746 0.0314 258.32);
   --color-dark-bg-2: oklch(0.349 0.0243 255.68);
+  --color-menu-bg: oklch(0.385 0.0225 261.24);
+  --color-menu-bg-hover: oklch(0.8993 0.0026 228.79);
 
   --color-border-1: oklch(0.4793 0.0265 248.38);
 
   --color-blue-1: oklch(0.6843 0.1754 247.62);
   --color-blue-2: oklch(0.7219 0.1534 246.6);
+
+  --color-text-dark: oklch(0.7773 0.0036 67.77);
+
+  --color-playing: oklch(0.8688 0.2321 130.35);
+  --color-online: oklch(0.8096 0.1072 226.42);
+
+  --color-green-1: oklch(0.5472 0.1345 126.65);
 }
 
 body {
