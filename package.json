@@ -12,15 +12,17 @@
     "format:check": "oxfmt --check"
   },
   "dependencies": {
-    "@hoah2333/wikidot-lib": "^0.0.11",
+    "@hoah2333/wikidot-lib": "^0.0.12",
     "@vscode-ftml/ftml-wasm": "1.28.1-2",
     "cheerio": "^1.2.0",
     "clsx": "^2.1.1",
     "html-react-parser": "^6.1.5",
     "lucide-react": "^1.25.0",
     "next": "16.2.10",
+    "next-intl": "^4.13.2",
     "react": "19.2.7",
-    "react-dom": "19.2.7"
+    "react-dom": "19.2.7",
+    "ts-pattern": "^5.9.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
