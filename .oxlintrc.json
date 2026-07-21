@@ -75,6 +75,7 @@
 
     "unicorn/no-null": "off",
     "unicorn/filename-case": ["error", { "cases": { "kebabCase": true, "camelCase": true, "pascalCase": true } }],
+    "unicorn/require-post-message-target-origin": "off",
 
     "oxc/no-async-await": "off",
 
