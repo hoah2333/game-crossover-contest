@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { Header } from "./components/header";
+import { LoadGuard } from "./components/loadGuard";
 import { LoginStatus } from "./components/login-status";
 import { Logo } from "./components/logo";
 
@@ -8,8 +9,16 @@ import type { ReactElement } from "react";
 
 const IndexPage = async ({ searchParams }: { searchParams: Promise<{ id: string }> }): Promise<ReactElement> => {
   const { id } = await searchParams;
-  const userId = Number(id) || 0;
+  const userId = Number(id);
 
+  return (
+    <LoadGuard userId={userId}>
+      <ContestPage userId={userId} />
+    </LoadGuard>
+  );
+};
+
+const ContestPage = ({ userId }: { userId: number }): ReactElement => {
   return (
     <div className="relative flex flex-col">
       <div className="h-20" />

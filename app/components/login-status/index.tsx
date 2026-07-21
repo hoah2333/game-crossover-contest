@@ -6,7 +6,7 @@ import { siteDomain } from "@/app/lib/siteDomain";
 import { Dropdown } from "./Dropdown";
 
 export const LoginStatus = async ({ userId }: { userId: number }) => {
-  const userInfo = await getUserInfo(userId);
+  const userInfo = userId > 0 ? await getUserInfo(userId) : null;
 
   return (
     <div className="text-sm text-text-dark">
