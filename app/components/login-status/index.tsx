@@ -1,12 +1,14 @@
 import Image from "next/image";
 
 import { Bell } from "lucide-react";
+import { getTranslations } from "next-intl/server";
 import { getUserInfo } from "@/app/lib/getUserInfo";
-import { siteDomain } from "@/app/lib/siteDomain";
 import { Dropdown } from "./Dropdown";
 
 export const LoginStatus = async ({ userId }: { userId: number }) => {
   const userInfo = userId > 0 ? await getUserInfo(userId) : null;
+  const t = await getTranslations("loginStatus");
+  const url = await getTranslations();
 
   return (
     <div className="text-sm text-text-dark">
@@ -14,19 +16,19 @@ export const LoginStatus = async ({ userId }: { userId: number }) => {
         {userInfo === null ? (
           <>
             <a
-              href={`https://www.wikidot.com/default--flow/login__LoginPopupScreen?openerUri=${siteDomain}`}
+              href={`https://www.wikidot.com/default--flow/login__LoginPopupScreen?openerUri=${url("siteUrl")}`}
               target="_blank"
               className="cursor-pointer transition-colors hover:text-white"
             >
-              登录
+              {t("login")}
             </a>
             <span>|</span>
             <a
-              href={`https://www.wikidot.com/default--flow/login__CreateAccountScreen?openerUri=${siteDomain}`}
+              href={`https://www.wikidot.com/default--flow/login__CreateAccountScreen?openerUri=${url("siteUrl")}`}
               target="_blank"
               className="cursor-pointer transition-colors hover:text-white"
             >
-              注册
+              {t("register")}
             </a>
           </>
         ) : (
@@ -41,7 +43,7 @@ export const LoginStatus = async ({ userId }: { userId: number }) => {
                 target="_blank"
                 className="cursor-pointer transition-colors hover:text-white"
               >
-                我的账户
+                {t("myAccount")}
               </a>
             </div>
 

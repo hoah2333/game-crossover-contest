@@ -1,3 +1,5 @@
+import createNextIntlPlugin from "next-intl/plugin";
+
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
@@ -6,4 +8,6 @@ const nextConfig: NextConfig = {
   turbopack: { rules: { "*.svg": { loaders: ["@svgr/webpack"], as: "*.js" } } },
 };
 
-export default nextConfig;
+const withNextIntl = createNextIntlPlugin("./app/lib/i18n/request.ts");
+
+export default withNextIntl(nextConfig);

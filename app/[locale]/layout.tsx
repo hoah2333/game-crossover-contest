@@ -1,0 +1,38 @@
+import "@/app/globals.css";
+
+import { hasLocale, NextIntlClientProvider } from "next-intl";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Inter } from "next/font/google";
+import { notFound } from "next/navigation";
+import { routing } from "@/app/lib/i18n/routing";
+
+import type { Metadata } from "next";
+import type { ReactNode } from "react";
+
+const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
+
+export const generateMetadata = async ({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> => {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "title" });
+  return { title: t("contestName"), description: t("contestName"), icons: "/steam-logo.svg" };
+};
+
+export default async function RootLayout({
+  params,
+  children,
+}: Readonly<{ params: Promise<{ locale: string }>; children: ReactNode }>): Promise<ReactNode> {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+
+  setRequestLocale(locale);
+
+  return (
+    <html lang={locale}>
+      <body className={`${inter.variable} antialiased`}>
+        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+      </body>
+    </html>
+  );
+}

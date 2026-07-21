@@ -3,9 +3,9 @@
 import clsx from "clsx";
 
 import { ChevronDown, Search } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useLayoutEffect, useRef, useState } from "react";
 import { useParseFtml } from "@/app/lib/hooks/useParseFtml";
-import { siteDomain } from "@/app/lib/siteDomain";
 import { parseTopBar } from "./parseTopBar";
 
 import type { JSX, KeyboardEvent } from "react";
@@ -53,6 +53,8 @@ const TopBar = ({
   const [hoveringItem, setHoveringItem] = hoveringItemState;
   const contentRef = useRef<HTMLDivElement>(null);
   const [panelHeight, setPanelHeight] = useState(0);
+
+  const t = useTranslations();
 
   useLayoutEffect((): void => {
     if (hoveringItem === null) {
@@ -108,7 +110,7 @@ const TopBar = ({
                 <a
                   key={`top-bar-child-${child.name}`}
                   className="flex w-full px-2 py-2 transition-colors hover:bg-white/30"
-                  href={child.href.startsWith("/") ? `${siteDomain}${child.href}` : child.href}
+                  href={child.href.startsWith("/") ? `${t("siteUrl")}${child.href}` : child.href}
                   target="_blank"
                   tabIndex={hoveringItem === null ? -1 : undefined}
                 >
@@ -123,17 +125,18 @@ const TopBar = ({
 };
 
 const SearchBar = () => {
+  const t = useTranslations();
   return (
     <div className="my-1 flex text-sm">
       <input
         className="w-80 border border-border-1 bg-dark-bg-2 p-2 placeholder:italic focus-within:border-blue-1 focus-visible:outline-none"
         name="search-bar"
-        placeholder="搜索"
+        placeholder={t("searchBar.search")}
       />
       <button
         className="group flex cursor-pointer items-center bg-blue-1 p-2 transition-colors hover:bg-blue-2"
         onClick={() => {
-          window.open(`${siteDomain}/search:crom`, "_blank", "noopener, noreferrer");
+          window.open(`${t("siteUrl")}/search:crom`, "_blank", "noopener, noreferrer");
         }}
       >
         <Search className="transition-[scale] group-hover:scale-120" size="24" />

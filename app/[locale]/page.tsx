@@ -1,9 +1,10 @@
 import Image from "next/image";
 
-import { Header } from "./components/header";
-import { LoadGuard } from "./components/loadGuard";
-import { LoginStatus } from "./components/login-status";
-import { Logo } from "./components/logo";
+import { Header } from "@/app/components/header";
+import { LoadGuard } from "@/app/components/loadGuard";
+import { LoginStatus } from "@/app/components/login-status";
+import { Logo } from "@/app/components/logo";
+import { SideBar } from "@/app/components/side-bar";
 
 import type { ReactElement } from "react";
 
@@ -29,6 +30,9 @@ const ContestPage = ({ userId }: { userId: number }): ReactElement => {
             <Logo />
             <LoginStatus userId={userId} />
           </div>
+        </div>
+        <div>
+          <SideBar />
         </div>
         <div>
           <Image src="/banner.png" alt="banner" loading="eager" width={3000} height={1000} />

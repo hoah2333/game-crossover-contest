@@ -3,18 +3,23 @@
 import clsx from "clsx";
 
 import { ChevronDown } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
-const menuItems = [
-  { label: "活动", href: "https://www.wikidot.com/account/activity" },
-  { label: "消息", href: "https://www.wikidot.com/account/messages" },
-  { label: "网站", href: "https://www.wikidot.com/account/sites" },
-  { label: "设置", href: "https://www.wikidot.com/account/settings" },
-  { label: "升级", href: "https://www.wikidot.com/account/upgrade" },
-] as const;
+const useMenuItems = () => {
+  const t = useTranslations("loginStatus");
+  return [
+    { label: t("activity"), href: "https://www.wikidot.com/account/activity" },
+    { label: t("messages"), href: "https://www.wikidot.com/account/messages" },
+    { label: t("sites"), href: "https://www.wikidot.com/account/sites" },
+    { label: t("settings"), href: "https://www.wikidot.com/account/settings" },
+    { label: t("upgrade"), href: "https://www.wikidot.com/account/upgrade" },
+  ];
+};
 
 export const Dropdown = ({ username }: { username: string }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const menuItems = useMenuItems();
   return (
     <button
       className={clsx("relative flex cursor-pointer items-center gap-1 transition-colors hover:text-white", {

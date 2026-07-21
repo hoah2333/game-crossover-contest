@@ -1,8 +1,8 @@
 import { wdModule } from "@hoah2333/wikidot-lib";
-
-const siteDomain = "https://scp-wiki-cn.wikidot.com";
+import { getTranslations } from "next-intl/server";
 
 export const getSourceFtml = async (sourcePage: string): Promise<string> => {
-  const source = await wdModule(siteDomain).getSource(sourcePage);
+  const t = await getTranslations();
+  const source = await wdModule(t("siteUrl")).getSource(sourcePage);
   return source;
 };
