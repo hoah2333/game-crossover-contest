@@ -8,8 +8,8 @@ export const useGetSourceHtml = (sourcePage: string) => {
   const t = useTranslations();
 
   useEffect((): void => {
-    const scpcn = wdModule(t("siteUrl"));
-    void scpcn.getSource(sourcePage).then((page: string): void => {
+    const site = wdModule(t("siteUrl"));
+    void site.getSource(sourcePage).then((page: string): void => {
       setSource(page);
     });
   }, [sourcePage, t]);

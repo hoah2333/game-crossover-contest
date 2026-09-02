@@ -31,7 +31,7 @@ const ContestPage = ({ userId }: { userId: number }): ReactElement => {
             <LoginStatus userId={userId} />
           </div>
         </div>
-        <div>
+        <div className="absolute top-0 left-0">
           <SideBar />
         </div>
         <div>
