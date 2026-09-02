@@ -1,7 +1,6 @@
 "use client";
 
-import clsx from "clsx";
-
+import { clsx } from "clsx";
 import { ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";

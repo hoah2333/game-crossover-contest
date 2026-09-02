@@ -1,15 +1,8 @@
 {
   "siteUrl": "https://scp-wiki-cn.wikidot.com",
-  "title": {
-    "contestName": "2026 电子游戏竞赛"
-  },
-  "scp": {
-    "name": "SCP Foundation",
-    "desciption": "Secure · Contain · Protect"
-  },
-  "searchBar": {
-    "search": "搜索"
-  },
+  "title": { "contestName": "2026 电子游戏竞赛" },
+  "scp": { "name": "SCP Foundation", "desciption": "Secure · Contain · Protect" },
+  "searchBar": { "search": "搜索" },
   "loginStatus": {
     "activity": "活动",
     "messages": "消息",
@@ -19,5 +12,6 @@
     "login": "登录",
     "register": "注册",
     "myAccount": "我的账户"
-  }
+  },
+  "desciption": ""
 }
