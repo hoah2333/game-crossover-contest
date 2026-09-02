@@ -1,10 +1,8 @@
 import "@/app/globals.css";
 
-import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getTranslations } from "next-intl/server";
 import { Inter } from "next/font/google";
-import { notFound } from "next/navigation";
-import { routing } from "@/app/lib/i18n/routing";
 
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
@@ -18,15 +16,9 @@ export const generateMetadata = async ({ params }: { params: Promise<{ locale: s
 };
 
 export default async function RootLayout({
-  params,
   children,
 }: Readonly<{ params: Promise<{ locale: string }>; children: ReactNode }>): Promise<ReactNode> {
-  const { locale } = await params;
-  if (!hasLocale(routing.locales, locale)) {
-    notFound();
-  }
-
-  setRequestLocale(locale);
+  const locale = await getLocale();
 
   return (
     <html lang={locale}>
