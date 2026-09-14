@@ -1,4 +1,5 @@
 import { load as cheerLoad } from "cheerio";
+import { ElementType } from "domelementtype";
 import { match } from "ts-pattern";
 
 import type { CheerioAPI } from "cheerio";
@@ -27,14 +28,22 @@ export const parseSideBar = (sideNav: string): SideBar => {
             .map((__, a: Element) => ({
               src: navDom(a).find("img").attr("src") ?? "",
               href: navDom(a).attr("href") ?? "",
+              alt: navDom(a).find("img").attr("alt") ?? "",
             }))
             .toArray(),
         }))
         .with("license", () => ({
           type: "license",
-          src: navDom(sideBlockElement).find("div.wj-image-container a").find("img").attr("src") ?? "",
-          href: navDom(sideBlockElement).find("div.wj-image-container a").attr("href") ?? "",
-          text: navDom(sideBlockElement).find("span[style*='font-size']").text(),
+          image: {
+            src: navDom(sideBlockElement).find("div.wj-image-container a").find("img").attr("src") ?? "",
+            href: navDom(sideBlockElement).find("div.wj-image-container a").attr("href") ?? "",
+            alt: navDom(sideBlockElement).find("div.wj-image-container a").find("img").attr("alt") ?? "",
+          },
+          text: navDom(sideBlockElement)
+            .find("span[style*='font-size']")
+            .contents()
+            .filter((__, node) => node.type === ElementType.Text)
+            .text(),
           links: navDom(sideBlockElement)
             .find("span[style*='font-size'] a")
             .map((__, a: Element) => ({ name: navDom(a).text(), href: navDom(a).attr("href") ?? "" }))
@@ -73,12 +82,8 @@ export const parseSideBar = (sideNav: string): SideBar => {
           collapsible:
             navDom(sideBlockElement).find("details.wj-collapsible").length > 0
               ? {
-                  show: navDom(sideBlockElement)
-                    .find("details.wj-collapsible span.wj-collapsible-show-text")
-                    .text(),
-                  hide: navDom(sideBlockElement)
-                    .find("details.wj-collapsible span.wj-collapsible-hide-text")
-                    .text(),
+                  show: navDom(sideBlockElement).find("details.wj-collapsible span.wj-collapsible-show-text").text(),
+                  hide: navDom(sideBlockElement).find("details.wj-collapsible span.wj-collapsible-hide-text").text(),
                 }
               : false,
         }));

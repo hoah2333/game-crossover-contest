@@ -14,8 +14,7 @@ export interface SideBarMediaBlock {
 }
 export interface SideBarLicenseBlock {
   type: "license";
-  src: string;
-  href: string;
+  image: SideBarMediaLink;
   text: string;
   links: SideBarLink[];
 }
@@ -30,4 +29,5 @@ export interface SideBarLink {
 export interface SideBarMediaLink {
   src: string;
   href: string;
+  alt: string;
 }

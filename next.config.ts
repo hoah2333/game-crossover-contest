@@ -4,7 +4,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
-  images: { remotePatterns: [{ hostname: "www.wikidot.com" }] },
+  images: {
+    remotePatterns: [{ hostname: "*.wikidot.com" }, { hostname: "*.scpwikicn.com" }, { hostname: "*.wdfiles.com" }],
+  },
   turbopack: { rules: { "*.svg": { loaders: ["@svgr/webpack"], as: "*.js" } } },
 };
 

@@ -63,6 +63,9 @@ importers:
       babel-plugin-react-compiler:
         specifier: 1.0.0
         version: 1.0.0
+      domelementtype:
+        specifier: ^2.3.0
+        version: 2.3.0
       domhandler:
         specifier: ^6.0.1
         version: 6.0.1

@@ -1,11 +1,13 @@
 "use client";
 
+import Image from "next/image";
+
 import { clsx } from "clsx";
 import { useTranslations } from "next-intl";
 import { useParseFtml } from "@/app/lib/hooks/useParseFtml";
 import { parseSideBar } from "./parseSideBar";
 
-import type { SideBarMediaBlock, SideBarNavBlock } from "./types";
+import type { SideBarLicenseBlock, SideBarMediaBlock, SideBarNavBlock } from "./types";
 
 export const SideBar = ({ cnSideNavFtml }: { cnSideNavFtml: string }) => {
   const cnSideNavHtml = useParseFtml(cnSideNavFtml);
@@ -34,6 +36,7 @@ export const SideBar = ({ cnSideNavFtml }: { cnSideNavFtml: string }) => {
                 <NavBlock sideBlock={sideBlock} />
               ))}
             {sideBlock.type === "media" && <MediaBlock sideBlock={sideBlock} />}
+            {sideBlock.type === "license" && <LicenseBlock sideBlock={sideBlock} />}
           </div>
         );
       })}
@@ -46,7 +49,7 @@ const NavBlock = ({ sideBlock }: { sideBlock: SideBarNavBlock }) => {
 
   return sideBlock.rows.map((row, rIndex) => (
     <div
-      className={clsx("flex gap-2", { "mt-2 mb-1 border-b border-blue-3": row.type === "heading" })}
+      className={clsx("flex gap-2", { "mt-2 mb-1 border-b border-blue-3 first-of-type:mt-0": row.type === "heading" })}
       // oxlint-disable-next-line react/no-array-index-key
       key={`${row.type}-${rIndex}`}
     >
@@ -68,12 +71,35 @@ const NavBlock = ({ sideBlock }: { sideBlock: SideBarNavBlock }) => {
   ));
 };
 
-const MediaBlock = ({ sideBlock } : {sideBlock: SideBarMediaBlock}) => {
-  return sideBlock.links.map((link) => (
-    <div className="flex gap-2" key={`${link.src}-${link.href}`}>
-      <a href={link.href} target="_blank" rel="noopener noreferrer">
-        <img src={link.src} width={100} height={100} />
-      </a>
+const MediaBlock = ({ sideBlock }: { sideBlock: SideBarMediaBlock }) => (
+  <>
+    {sideBlock.heading && (
+      <div className="mb-1 border-b border-blue-3 text-sm font-bold text-blue-3">{sideBlock.heading}</div>
+    )}
+    <div className="mt-2 flex justify-center gap-2">
+      {sideBlock.links.map((link) => (
+        <a href={link.href} target="_blank" rel="noopener noreferrer" key={`${link.src}-${link.href}`}>
+          <Image src={link.src} width={30} height={30} alt={link.alt} className="w-auto" />
+        </a>
+      ))}
     </div>
-  ))
-}
+  </>
+);
+
+const LicenseBlock = ({ sideBlock }: { sideBlock: SideBarLicenseBlock }) => {
+  return (
+    <div className="flex flex-col items-center">
+      <a href={sideBlock.image.href} target="_blank" rel="noopener noreferrer">
+        <Image src={sideBlock.image.src} width={120} height={42} alt={sideBlock.image.alt} />
+      </a>
+      <div>{sideBlock.text}</div>
+      <div>
+        {sideBlock.links.map((link) => (
+          <a href={link.href} target="_blank" rel="noopener noreferrer" key={`${link.name}-${link.href}`}>
+            {link.name}
+          </a>
+        ))}
+      </div>
+    </div>
+  );
+};
