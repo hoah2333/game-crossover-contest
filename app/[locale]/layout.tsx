@@ -21,7 +21,7 @@ export default async function RootLayout({
   const locale = await getLocale();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} className="scrollbar-thin scrollbar-thumb-white scrollbar-track-dark-bg">
       <body className={`${inter.variable} antialiased`}>
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>

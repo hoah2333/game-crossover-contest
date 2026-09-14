@@ -4,24 +4,49 @@ import Image from "next/image";
 
 import { clsx } from "clsx";
 import { useTranslations } from "next-intl";
+import { useRef, useState } from "react";
 import { useParseFtml } from "@/app/lib/hooks/useParseFtml";
 import { parseSideBar } from "./parseSideBar";
 
+import type { KeyboardEvent } from "react";
 import type { SideBarLicenseBlock, SideBarMediaBlock, SideBarNavBlock } from "./types";
 
 export const SideBar = ({ cnSideNavFtml }: { cnSideNavFtml: string }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const sideBarRef = useRef<HTMLDivElement>(null);
+
   const cnSideNavHtml = useParseFtml(cnSideNavFtml);
   const cnSideNav = parseSideBar(cnSideNavHtml);
 
-  console.log(cnSideNav);
-
   return (
-    <div
-      dir="rtl"
-      className="border-dark-border fixed z-20 flex max-h-dvh w-76 flex-col overflow-y-auto border-r bg-dark-bg px-2 py-2 text-white"
-    >
-      {cnSideNav.map((sideBlock, index) => {
-        return (
+    <>
+      <div className="fixed top-0 left-0 z-20 bg-dark-bg text-white">
+        <button
+          className="cursor-pointer px-3 py-1 text-4xl"
+          onClick={() => {
+            setIsOpen(true);
+            sideBarRef.current?.focus();
+          }}
+        >
+          ≡
+        </button>
+      </div>
+      <div
+        ref={sideBarRef}
+        dir="rtl"
+        className={clsx(
+          "border-dark-border fixed top-0 z-20 flex max-h-dvh w-76 scrollbar-thin scrollbar-thumb-white scrollbar-track-dark-bg flex-col overflow-y-auto border-r bg-dark-bg px-2 py-2 text-white transition-transform duration-300",
+          isOpen ? "translate-x-0" : "-translate-x-77",
+        )}
+        onKeyDown={(event: KeyboardEvent<HTMLDivElement>) => {
+          if (event.key === "Escape") {
+            setIsOpen(false);
+          }
+        }}
+        role="menu"
+        tabIndex={0}
+      >
+        {cnSideNav.map((sideBlock, index) => (
           // oxlint-disable-next-line react/no-array-index-key
           <div dir="ltr" className="mb-2 bg-dark-bg-2 p-2" key={`${sideBlock.type}-${index}`}>
             {sideBlock.type === "nav" &&
@@ -38,9 +63,23 @@ export const SideBar = ({ cnSideNavFtml }: { cnSideNavFtml: string }) => {
             {sideBlock.type === "media" && <MediaBlock sideBlock={sideBlock} />}
             {sideBlock.type === "license" && <LicenseBlock sideBlock={sideBlock} />}
           </div>
-        );
-      })}
-    </div>
+        ))}
+      </div>
+      {isOpen && (
+        <button
+          className="fixed top-0 left-0 z-10 h-screen w-screen bg-black/50 transition-colors duration-300 starting:bg-transparent"
+          onClick={() => setIsOpen(false)}
+          onKeyDown={(event: KeyboardEvent<HTMLButtonElement>) => {
+            if (event.key === "Escape" || event.key === " " || event.key === "Enter") {
+              setIsOpen(false);
+            }
+          }}
+          tabIndex={0}
+        >
+          <span className="sr-only">Close sidebar</span>
+        </button>
+      )}
+    </>
   );
 };
 
@@ -86,20 +125,18 @@ const MediaBlock = ({ sideBlock }: { sideBlock: SideBarMediaBlock }) => (
   </>
 );
 
-const LicenseBlock = ({ sideBlock }: { sideBlock: SideBarLicenseBlock }) => {
-  return (
-    <div className="flex flex-col items-center">
-      <a href={sideBlock.image.href} target="_blank" rel="noopener noreferrer">
-        <Image src={sideBlock.image.src} width={120} height={42} alt={sideBlock.image.alt} />
-      </a>
-      <div>{sideBlock.text}</div>
-      <div>
-        {sideBlock.links.map((link) => (
-          <a href={link.href} target="_blank" rel="noopener noreferrer" key={`${link.name}-${link.href}`}>
-            {link.name}
-          </a>
-        ))}
-      </div>
+const LicenseBlock = ({ sideBlock }: { sideBlock: SideBarLicenseBlock }) => (
+  <div className="flex flex-col items-center">
+    <a href={sideBlock.image.href} target="_blank" rel="noopener noreferrer">
+      <Image src={sideBlock.image.src} width={120} height={42} alt={sideBlock.image.alt} />
+    </a>
+    <div>{sideBlock.text}</div>
+    <div>
+      {sideBlock.links.map((link) => (
+        <a href={link.href} target="_blank" rel="noopener noreferrer" key={`${link.name}-${link.href}`}>
+          {link.name}
+        </a>
+      ))}
     </div>
-  );
-};
+  </div>
+);
