@@ -13,5 +13,8 @@
     "register": "注册",
     "myAccount": "我的账户"
   },
-  "desciption": ""
+  "footer": {
+    "license": "除非特别注明，本页内容采用以下授权方式：<link>Creative Commons Attribution-ShareAlike 3.0 License</link>",
+    "sponsers": "赞助者列表"
+  }
 }

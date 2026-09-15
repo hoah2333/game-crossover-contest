@@ -41,6 +41,9 @@ const ContestPage = ({ userId }: { userId: number }): ReactElement => {
       <main>
         <div className="h-1000" />
       </main>
+      <footer>
+        <Footer />
+      </footer>
     </div>
   );
 };
