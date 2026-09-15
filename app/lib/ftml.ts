@@ -5,5 +5,5 @@ export const parseFtml = async (ftml: string): Promise<string> => {
   if (!ready) {
     await loading;
   }
-  return renderHTML(ftml, undefined, "page", "wikidot").html;
+  return renderHTML(ftml, undefined, "page", "wikijump").html;
 };
