@@ -13,6 +13,7 @@
     "register": "注册",
     "myAccount": "我的账户"
   },
+  "carousel": { "previous": "上一页", "next": "下一页", "gotoPage": "跳转到第 {page} 页" },
   "footer": {
     "license": "除非特别注明，本页内容采用以下授权方式：<link>Creative Commons Attribution-ShareAlike 3.0 License</link>",
     "sponsers": "赞助者列表"

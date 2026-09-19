@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import { Carousel } from "@/app/components/carousel";
+import { Footer } from "@/app/components/footer";
 import { Header } from "@/app/components/header";
 import { LoadGuard } from "@/app/components/loadGuard";
 import { LoginStatus } from "@/app/components/login-status";
@@ -21,7 +23,7 @@ const IndexPage = async ({ searchParams }: { searchParams: Promise<{ id: string 
 
 const ContestPage = ({ userId }: { userId: number }): ReactElement => {
   return (
-    <div className="relative flex flex-col">
+    <div className="relative flex flex-col bg-page-bg">
       <div className="h-20" />
       <Header />
       <header className="absolute top-0">
@@ -38,8 +40,9 @@ const ContestPage = ({ userId }: { userId: number }): ReactElement => {
           <Image src="/banner.png" alt="banner" loading="eager" width={3000} height={1000} />
         </div>
       </header>
-      <main>
-        <div className="h-1000" />
+      <main className="z-2 mx-auto mt-100 w-full max-w-pc">
+        <Carousel />
+        <div className="h-300" />
       </main>
       <footer>
         <Footer />

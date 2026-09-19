@@ -6,6 +6,7 @@
 @theme {
   --container-pc: 1200px;
 
+  --color-page-bg: oklch(0.2436 0.059 267.97);
   --color-dark-bg: oklch(0.2746 0.0314 258.32);
   --color-dark-bg-2: oklch(0.349 0.0243 255.68);
   --color-menu-bg: oklch(0.385 0.0225 261.24);
@@ -23,6 +24,7 @@
   --color-online: oklch(0.8096 0.1072 226.42);
 
   --color-green-1: oklch(0.5472 0.1345 126.65);
+  --color-green-1-hover: color-mix(in oklab, var(--color-green-1), white 10%);
 }
 
 body {
