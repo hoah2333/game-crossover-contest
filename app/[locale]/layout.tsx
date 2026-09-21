@@ -3,6 +3,7 @@ import "@/app/globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Inter } from "next/font/google";
+import { routing } from "@/app/lib/i18n/routing";
 
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
@@ -13,6 +14,10 @@ export const generateMetadata = async ({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "title" });
   return { title: t("contestName"), description: t("contestName"), icons: "/steam-logo.svg" };
+};
+
+export const generateStaticParams = () => {
+  return routing.locales.map((locale) => ({ locale }));
 };
 
 export default async function RootLayout({

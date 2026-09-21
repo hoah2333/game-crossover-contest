@@ -11,12 +11,12 @@ import { parseSideBar } from "./parseSideBar";
 import type { KeyboardEvent } from "react";
 import type { SideBarLicenseBlock, SideBarMediaBlock, SideBarNavBlock } from "./types";
 
-export const SideBar = ({ cnSideNavFtml }: { cnSideNavFtml: string }) => {
+export const SideBar = ({ sideNavFtml }: { sideNavFtml: string }) => {
   const [isOpen, setIsOpen] = useState(false);
   const sideBarRef = useRef<HTMLDivElement>(null);
 
-  const cnSideNavHtml = useParseFtml(cnSideNavFtml);
-  const cnSideNav = parseSideBar(cnSideNavHtml);
+  const sideNavHtml = useParseFtml(sideNavFtml);
+  const sideNav = parseSideBar(sideNavHtml);
 
   return (
     <>
@@ -35,7 +35,7 @@ export const SideBar = ({ cnSideNavFtml }: { cnSideNavFtml: string }) => {
         ref={sideBarRef}
         dir="rtl"
         className={clsx(
-          "border-dark-border fixed top-0 z-20 flex max-h-dvh w-76 scrollbar-thin scrollbar-thumb-white scrollbar-track-dark-bg flex-col overflow-y-auto border-r bg-dark-bg px-2 py-2 text-white transition-transform duration-300",
+          "border-dark-border fixed top-0 z-20 flex max-h-screen w-76 scrollbar-thin scrollbar-thumb-white scrollbar-track-dark-bg flex-col overflow-y-auto border-r bg-dark-bg px-2 py-2 text-white transition-transform duration-300",
           isOpen ? "translate-x-0" : "-translate-x-77",
         )}
         onKeyDown={(event: KeyboardEvent<HTMLDivElement>) => {
@@ -46,7 +46,7 @@ export const SideBar = ({ cnSideNavFtml }: { cnSideNavFtml: string }) => {
         role="menu"
         tabIndex={0}
       >
-        {cnSideNav.map((sideBlock, index) => (
+        {sideNav.map((sideBlock, index) => (
           // oxlint-disable-next-line react/no-array-index-key
           <div dir="ltr" className="mb-2 bg-dark-bg-2 p-2" key={`${sideBlock.type}-${index}`}>
             {sideBlock.type === "nav" &&

@@ -19,7 +19,7 @@ interface TopBarItemChild {
   href: string;
 }
 
-export const Header = ({ cnTopNavFtml }: { cnTopNavFtml: string }): JSX.Element => {
+export const Header = ({ topNavFtml }: { topNavFtml: string }): JSX.Element => {
   const [hoveringItem, setHoveringItem] = useState<number | null>(null);
 
   return (
@@ -33,7 +33,7 @@ export const Header = ({ cnTopNavFtml }: { cnTopNavFtml: string }): JSX.Element 
       }}
     >
       <div className="mx-auto w-full max-w-pc text-white">
-        <TopBar hoveringItemState={[hoveringItem, setHoveringItem]} cnTopNavFtml={cnTopNavFtml} />
+        <TopBar hoveringItemState={[hoveringItem, setHoveringItem]} topNavFtml={topNavFtml} />
       </div>
     </div>
   );
@@ -41,13 +41,13 @@ export const Header = ({ cnTopNavFtml }: { cnTopNavFtml: string }): JSX.Element 
 
 const TopBar = ({
   hoveringItemState,
-  cnTopNavFtml,
+  topNavFtml,
 }: {
   hoveringItemState: DataState<number | null>;
-  cnTopNavFtml: string;
+  topNavFtml: string;
 }): JSX.Element => {
-  const cnTopNavHtml = useParseFtml(cnTopNavFtml);
-  const cnTopNav = parseTopBar(cnTopNavHtml);
+  const topNavHtml = useParseFtml(topNavFtml);
+  const topNav = parseTopBar(topNavHtml);
 
   const [hoveringItem, setHoveringItem] = hoveringItemState;
   const contentRef = useRef<HTMLDivElement>(null);
@@ -67,7 +67,7 @@ const TopBar = ({
     <>
       <div className="flex items-start justify-between">
         <div className="flex gap-4 text-sm">
-          {cnTopNav.map((item: TopBarItem, index: number): JSX.Element => (
+          {topNav.map((item: TopBarItem, index: number): JSX.Element => (
             <button
               key={`top-bar-item-${item.name}`}
               className={clsx(
@@ -102,7 +102,7 @@ const TopBar = ({
       <div className="overflow-hidden transition-[height] duration-300 ease-out" style={{ height: panelHeight }}>
         <div ref={contentRef} className="columns-4 py-2">
           {hoveringItem !== null &&
-            cnTopNav[hoveringItem]?.children.map((child: TopBarItemChild): JSX.Element => (
+            topNav[hoveringItem]?.children.map((child: TopBarItemChild): JSX.Element => (
               <a
                 key={`top-bar-child-${child.name}`}
                 className="flex w-full px-2 py-2 transition-colors hover:bg-white/30"

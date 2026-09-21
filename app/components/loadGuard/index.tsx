@@ -1,16 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
-import type { ReactNode } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 type ContestMessage = { type: "ping" } | { type: "logged-in" };
 
-const PING_TIMEOUT_MS = 100;
-
-export const LoadGuard = ({ userId, children }: { userId: number; children: ReactNode }) => {
+export const LoadGuard = () => {
+  const searchParams = useSearchParams();
+  const userId = Number(searchParams.get("id"));
   const isLoggedIn = userId > 0;
-  const [ready, setReady] = useState(isLoggedIn);
 
   useEffect(() => {
     const channel = new BroadcastChannel("contest");
@@ -29,27 +27,18 @@ export const LoadGuard = ({ userId, children }: { userId: number; children: Reac
 
     channel.postMessage({ type: "ping" } satisfies ContestMessage);
 
-    const timeoutId = globalThis.setTimeout(() => {
-      setReady(true);
-    }, PING_TIMEOUT_MS);
-
     channel.addEventListener("message", (event: MessageEvent) => {
       if (isContestMessage(event.data) && event.data.type === "logged-in") {
-        globalThis.clearTimeout(timeoutId);
         location.replace("about:blank");
       }
     });
 
     return () => {
-      globalThis.clearTimeout(timeoutId);
       channel.close();
     };
   }, [isLoggedIn]);
 
-  if (!ready) {
-    return null;
-  }
-  return children;
+  return null;
 };
 
 const isContestMessage = (data: unknown): data is ContestMessage => {

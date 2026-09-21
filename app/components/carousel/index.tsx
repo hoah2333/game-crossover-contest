@@ -1,4 +1,6 @@
+import { connection } from "next/server";
 import { CarouselClient } from "./CarouselClient";
+import { parseCarouselItemsFtml } from "./getCarouselItems";
 import { mockCarouselItems } from "./mockItems";
 
 import type { CarouselItem } from "./types";
@@ -6,7 +8,9 @@ import type { CarouselItem } from "./types";
 // 最多只能放 21 个图片
 const MAX_ITEMS = 21;
 
-export const Carousel = () => {
+export const Carousel = async () => {
+  // await parseCarouselItemsFtml()
+  await connection();
   const items = pickCarouselItems(mockCarouselItems);
   if (items.length === 0) {
     return null;

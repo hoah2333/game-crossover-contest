@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { Suspense } from "react";
 import { Carousel } from "@/app/components/carousel";
 import { Footer } from "@/app/components/footer";
 import { Header } from "@/app/components/header";
@@ -10,18 +11,7 @@ import { SideBar } from "@/app/components/side-bar";
 
 import type { ReactElement } from "react";
 
-const IndexPage = async ({ searchParams }: { searchParams: Promise<{ id: string }> }): Promise<ReactElement> => {
-  const { id } = await searchParams;
-  const userId = Number(id);
-
-  return (
-    <LoadGuard userId={userId}>
-      <ContestPage userId={userId} />
-    </LoadGuard>
-  );
-};
-
-const ContestPage = ({ userId }: { userId: number }): ReactElement => {
+const IndexPage = ({ searchParams }: { searchParams: Promise<{ id: string }> }): ReactElement => {
   return (
     <div className="relative flex flex-col bg-page-bg">
       <div className="h-20" />
@@ -30,7 +20,9 @@ const ContestPage = ({ userId }: { userId: number }): ReactElement => {
         <div className="absolute top-0 w-full">
           <div className="mx-auto flex w-full max-w-pc justify-between">
             <Logo />
-            <LoginStatus userId={userId} />
+            <Suspense fallback={null}>
+              <LoginStatusSuspense searchParams={searchParams} />
+            </Suspense>
           </div>
         </div>
         <div className="absolute top-0 left-0">
@@ -41,14 +33,26 @@ const ContestPage = ({ userId }: { userId: number }): ReactElement => {
         </div>
       </header>
       <main className="z-2 mx-auto mt-100 w-full max-w-pc">
-        <Carousel />
+        <Suspense fallback={null}>
+          <Carousel />
+        </Suspense>
         <div className="h-300" />
       </main>
       <footer>
         <Footer />
       </footer>
+      <Suspense fallback={null}>
+        <LoadGuard />
+      </Suspense>
     </div>
   );
+};
+
+const LoginStatusSuspense = async ({ searchParams }: { searchParams: Promise<{ id: string }> }) => {
+  const { id } = await searchParams;
+  const userId = Number(id);
+
+  return <LoginStatus userId={userId} />;
 };
 
 export default IndexPage;
