@@ -19,7 +19,7 @@ const IndexPage = ({ searchParams }: { searchParams: Promise<{ id: string }> }):
       <header className="absolute top-0">
         <div className="absolute top-0 w-full">
           <div className="mx-auto flex w-full max-w-pc justify-between">
-            <Logo />
+            <Logo className="text-white" />
             <Suspense fallback={null}>
               <LoginStatusSuspense searchParams={searchParams} />
             </Suspense>

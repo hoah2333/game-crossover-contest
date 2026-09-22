@@ -7,7 +7,7 @@ import type { ReactNode } from "react";
 export const Footer = async () => {
   const t = await getTranslations("footer");
   return (
-    <div className="flex w-dvw justify-center gap-40 bg-dark-bg py-10 text-white">
+    <div className="flex w-dvw justify-center gap-40 bg-dark-bg py-10 text-text-dark">
       <FooterLeft t={t} />
       <FooterRight t={t} />
     </div>
