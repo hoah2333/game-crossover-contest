@@ -4,22 +4,12 @@ import { clsx } from "clsx";
 import { ChevronDown, Search } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useLayoutEffect, useRef, useState } from "react";
-import { useParseFtml } from "@/app/lib/hooks/useParseFtml";
-import { parseTopBar } from "./parseTopBar";
 
 import type { JSX, KeyboardEvent } from "react";
 import type { DataState } from "@/app/types";
+import type { TopBarItem, TopBarItemChild, TopBar as TopBarType } from "./types";
 
-interface TopBarItem {
-  name: string;
-  children: TopBarItemChild[];
-}
-interface TopBarItemChild {
-  name: string;
-  href: string;
-}
-
-export const Header = ({ topNavFtml }: { topNavFtml: string }): JSX.Element => {
+export const Header = ({ topNav }: { topNav: TopBarType }): JSX.Element => {
   const [hoveringItem, setHoveringItem] = useState<number | null>(null);
 
   return (
@@ -33,7 +23,7 @@ export const Header = ({ topNavFtml }: { topNavFtml: string }): JSX.Element => {
       }}
     >
       <div className="mx-auto w-full max-w-pc text-white">
-        <TopBar hoveringItemState={[hoveringItem, setHoveringItem]} topNavFtml={topNavFtml} />
+        <TopBar hoveringItemState={[hoveringItem, setHoveringItem]} topNav={topNav} />
       </div>
     </div>
   );
@@ -41,14 +31,11 @@ export const Header = ({ topNavFtml }: { topNavFtml: string }): JSX.Element => {
 
 const TopBar = ({
   hoveringItemState,
-  topNavFtml,
+  topNav,
 }: {
   hoveringItemState: DataState<number | null>;
-  topNavFtml: string;
+  topNav: TopBarType;
 }): JSX.Element => {
-  const topNavHtml = useParseFtml(topNavFtml);
-  const topNav = parseTopBar(topNavHtml);
-
   const [hoveringItem, setHoveringItem] = hoveringItemState;
   const contentRef = useRef<HTMLDivElement>(null);
   const [measuredHeight, setMeasuredHeight] = useState(0);

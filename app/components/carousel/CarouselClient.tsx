@@ -113,9 +113,9 @@ const CarouselCard = ({ item }: { item: CarouselItem }) => {
     <div className="flex min-w-0 shrink-0 grow-0 basis-full justify-center pl-4 lg:basis-1/3 lg:justify-start">
       <div className="group relative aspect-5/6 overflow-hidden">
         <a className="cursor-pointer" href={`${t("siteUrl")}/${item.slug}`} target="_blank" rel="noopener noreferrer">
-          <Image className="object-cover" src={item.image} alt={item.title} width={500} height={600} />
+          <Image className="object-cover" src={item.image === "" ? "/carousel-banner.png" : item.image} alt={item.title} width={500} height={600} />
         </a>
-        <div className="absolute bottom-0 left-0 flex h-1/2 w-full translate-y-full flex-col justify-between bg-dark-bg p-4 text-white transition-transform duration-300 group-focus-within:translate-y-0 group-hover:translate-y-0">
+        <div className="absolute bottom-0 left-0 flex h-2/3 w-full translate-y-full flex-col justify-between bg-dark-bg p-4 text-white transition-transform duration-300 group-focus-within:translate-y-0 group-hover:translate-y-0">
           <div className="flex flex-col gap-2">
             <div className="text-2xl">
               <a
@@ -148,7 +148,7 @@ const CarouselCard = ({ item }: { item: CarouselItem }) => {
               ({item.ratingCount})
             </div>
             <div className="flex flex-wrap gap-2 text-sm">
-              {item.tags.map((tag) => (
+              {item.tags.slice(0, 10).map((tag) => (
                 <a
                   className="cursor-pointer bg-white/10 p-1 transition-colors hover:bg-white/20"
                   href={`${t("siteUrl")}/system:page-tags/tag/${tag}#pages`}
@@ -157,6 +157,7 @@ const CarouselCard = ({ item }: { item: CarouselItem }) => {
                   {tag}
                 </a>
               ))}
+              {item.tags.length > 10 && <span className="bg-white/10 p-1">+{item.tags.length - 10} 个标签</span>}
             </div>
           </div>
           <div>

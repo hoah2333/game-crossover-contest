@@ -5,18 +5,13 @@ import Image from "next/image";
 import { clsx } from "clsx";
 import { useTranslations } from "next-intl";
 import { useRef, useState } from "react";
-import { useParseFtml } from "@/app/lib/hooks/useParseFtml";
-import { parseSideBar } from "./parseSideBar";
 
 import type { KeyboardEvent } from "react";
-import type { SideBarLicenseBlock, SideBarMediaBlock, SideBarNavBlock } from "./types";
+import type { SideBar as SideBarType, SideBarLicenseBlock, SideBarMediaBlock, SideBarNavBlock } from "./types";
 
-export const SideBar = ({ sideNavFtml }: { sideNavFtml: string }) => {
+export const SideBar = ({ sideNav }: { sideNav: SideBarType }) => {
   const [isOpen, setIsOpen] = useState(false);
   const sideBarRef = useRef<HTMLDivElement>(null);
-
-  const sideNavHtml = useParseFtml(sideNavFtml);
-  const sideNav = parseSideBar(sideNavHtml);
 
   return (
     <>
