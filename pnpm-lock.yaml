@@ -172,6 +172,9 @@ importers:
       '@vscode-ftml/ftml-wasm':
         specifier: 1.42.1
         version: 1.42.1
+      '@wikijump/ftml-wasm':
+        specifier: file:D:\wikijump\web\modules\ftml-wasm\dist
+        version: file:../../wikijump/web/modules/ftml-wasm/dist
       cheerio:
         specifier: ^1.2.0
         version: 1.2.0
@@ -1850,6 +1853,9 @@ packages:
 
   '@vscode-ftml/ftml-wasm@1.42.1':
     resolution: {integrity: sha512-bcH8aUFHXd9MwakZZPRnW3aqn43hb0SypRJEUR5vY3XwUyQg22lPLkb5BqVhgbbDbfWxCpqFb85hcKr61SOfSw==}
+
+  '@wikijump/ftml-wasm@file:../../wikijump/web/modules/ftml-wasm/dist':
+    resolution: {directory: ../../wikijump/web/modules/ftml-wasm/dist, type: directory}
 
   argparse@2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
@@ -4057,6 +4063,8 @@ snapshots:
     optional: true
 
   '@vscode-ftml/ftml-wasm@1.42.1': {}
+
+  '@wikijump/ftml-wasm@file:../../wikijump/web/modules/ftml-wasm/dist': {}
 
   argparse@2.0.1: {}
 

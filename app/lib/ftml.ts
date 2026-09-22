@@ -1,4 +1,4 @@
-import { init, loading, ready, renderHTML } from "@vscode-ftml/ftml-wasm";
+import { init, loading, ready, renderHTML } from "@wikijump/ftml-wasm";
 
 export const parseFtml = async (ftml: string): Promise<string> => {
   await init();
