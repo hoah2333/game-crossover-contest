@@ -25,7 +25,9 @@
     "next-intl": "^4.14.6",
     "react": "19.3.0",
     "react-dom": "19.3.0",
-    "ts-pattern": "^5.9.0"
+    "ts-pattern": "^5.9.0",
+    "use-local-storage-state": "^20.0.0",
+    "valibot": "^1.5.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^8.1.0",
