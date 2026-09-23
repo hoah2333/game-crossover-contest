@@ -1,4 +1,4 @@
-export type TopBar = TopBarItem[]
+export type TopBar = TopBarItem[];
 
 export interface TopBarItem {
   name: string;

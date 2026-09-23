@@ -9,6 +9,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useState } from "react";
 import { match, P } from "ts-pattern";
+import { useReadingList } from "@/app/lib/hooks/useReadingList";
 
 import type { EmblaCarouselType } from "embla-carousel";
 import type { ReactNode } from "react";
@@ -109,11 +110,19 @@ const CarouselCard = ({ item }: { item: CarouselItem }) => {
     setNow(Date.now());
   }, []);
 
+  const { isInReadingList, addToReadingList, removeFromReadingList } = useReadingList();
+
   return (
     <div className="flex min-w-0 shrink-0 grow-0 basis-full justify-center pl-4 lg:basis-1/3 lg:justify-start">
       <div className="group relative aspect-5/6 overflow-hidden">
         <a className="cursor-pointer" href={`${t("siteUrl")}/${item.slug}`} target="_blank" rel="noopener noreferrer">
-          <Image className="object-cover" src={item.image === "" ? "/carousel-banner.png" : item.image} alt={item.title} width={500} height={600} />
+          <Image
+            className="object-cover"
+            src={item.image === "" ? "/carousel-banner.png" : item.image}
+            alt={item.title}
+            width={500}
+            height={600}
+          />
         </a>
         <div className="absolute bottom-0 left-0 flex h-2/3 w-full translate-y-full flex-col justify-between bg-dark-bg p-4 text-white transition-transform duration-300 group-focus-within:translate-y-0 group-hover:translate-y-0">
           <div className="flex flex-col gap-2">
@@ -131,19 +140,23 @@ const CarouselCard = ({ item }: { item: CarouselItem }) => {
               {item.ratingCount <= 15
                 ? match(item.postDate > now - 24 * 60 * 60 * 1000 * 15)
                     .returnType<ReactNode>()
-                    .with(true, () => <div className="text-[#70b590]">最新发布</div>)
-                    .with(false, () => <div className="text-[#929396]">冷门作品</div>)
+                    .with(true, () => <div className="text-[#70b590]">{t("carousel.ratingTexts.latest")}</div>)
+                    .with(false, () => <div className="text-[#929396]">{t("carousel.ratingTexts.cold")}</div>)
                     .exhaustive()
                 : match(item.rating / item.ratingCount)
                     .returnType<ReactNode>()
-                    .with(P.number.lt(0.35), () => <div className="text-[#be5d30]">多半差评</div>)
-                    .with(P.number.gte(0.35).and(P.number.lt(0.65)), () => (
-                      <div className="text-[#ad9872]">褒贬不一</div>
+                    .with(P.number.lt(0.35), () => (
+                      <div className="text-[#be5d30]">{t("carousel.ratingTexts.negative")}</div>
                     ))
-                    .with(P.number.gte(0.65), () => <div className="text-[#5197c3]">多半好评</div>)
+                    .with(P.number.gte(0.35).and(P.number.lt(0.65)), () => (
+                      <div className="text-[#ad9872]">{t("carousel.ratingTexts.mixed")}</div>
+                    ))
+                    .with(P.number.gte(0.65), () => (
+                      <div className="text-[#5197c3]">{t("carousel.ratingTexts.positive")}</div>
+                    ))
                     .otherwise(() => (
                       // 这个 otherwise 应该是 0/0 的情况
-                      <div className="text-[#929396]">冷门作品</div>
+                      <div className="text-[#929396]">{t("carousel.ratingTexts.cold")}</div>
                     ))}
               ({item.ratingCount})
             </div>
@@ -157,17 +170,34 @@ const CarouselCard = ({ item }: { item: CarouselItem }) => {
                   {tag}
                 </a>
               ))}
-              {item.tags.length > 10 && <span className="bg-white/10 p-1">+{item.tags.length - 10} 个标签</span>}
+              {item.tags.length > 10 && (
+                <span className="bg-white/10 p-1">
+                  {t("carousel.additionalTags", { count: item.tags.length - 10 })}
+                </span>
+              )}
             </div>
           </div>
           <div>
-            <button className="cursor-pointer bg-green-1 px-4 py-2 transition-colors hover:bg-green-1-hover">
-              添加至阅读列表
+            <button
+              className="cursor-pointer bg-green-1 px-4 py-2 text-sm transition-colors hover:bg-green-1-hover"
+              onClick={() => {
+                if (isInReadingList(item.slug)) {
+                  removeFromReadingList(item.slug);
+                } else {
+                  addToReadingList(item.slug, item.title);
+                }
+              }}
+            >
+              {isInReadingList(item.slug) ? t("readingList.remove") : t("readingList.add")}
             </button>
           </div>
         </div>
         <div className="absolute right-0 bottom-0 bg-dark-bg/50 px-4 py-2 text-sm text-white transition-transform duration-300 group-focus-within:-translate-y-4 group-hover:-translate-y-4">
-          由 {item.authors[0]} {item.authors.length > 1 ? `等${item.authors.length}人` : ""}创作
+          {t("carousel.createdBy", {
+            authors:
+              item.authors[0] +
+              (item.authors.length > 1 ? t("carousel.authors", { count: item.authors.length - 1 }) : ""),
+          })}
         </div>
       </div>
     </div>

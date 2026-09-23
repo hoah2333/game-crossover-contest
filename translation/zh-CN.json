@@ -13,7 +13,27 @@
     "register": "注册",
     "myAccount": "我的账户"
   },
-  "carousel": { "previous": "上一页", "next": "下一页", "gotoPage": "跳转到第 {page} 页" },
+  "readingList": {
+    "readingList": "阅读清单",
+    "add": "添加至阅读清单",
+    "remove": "移出阅读清单",
+    "empty": "阅读列表为空"
+  },
+  "carousel": {
+    "previous": "上一页",
+    "next": "下一页",
+    "gotoPage": "跳转到第 {page} 页",
+    "ratingTexts": {
+      "latest": "最新发布",
+      "cold": "冷门作品",
+      "negative": "多半差评",
+      "mixed": "褒贬不一",
+      "positive": "多半好评"
+    },
+    "additionalTags": "+{count} 个标签",
+    "createdBy": "由 {authors} 创作",
+    "authors": "等 {count} 人"
+  },
   "footer": {
     "license": "除非特别注明，本页内容采用以下授权方式：<link>Creative Commons Attribution-ShareAlike 3.0 License</link>",
     "sponsers": "赞助者列表"

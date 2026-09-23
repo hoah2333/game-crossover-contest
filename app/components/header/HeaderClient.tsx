@@ -1,9 +1,10 @@
 "use client";
 
 import { clsx } from "clsx";
-import { ChevronDown, Search } from "lucide-react";
+import { ChevronDown, Search, Star, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useLayoutEffect, useRef, useState } from "react";
+import { useReadingList } from "@/app/lib/hooks/useReadingList";
 
 import type { JSX, KeyboardEvent } from "react";
 import type { DataState } from "@/app/types";
@@ -84,7 +85,10 @@ const TopBar = ({
             </button>
           ))}
         </div>
-        <SearchBar />
+        <div className="flex gap-2">
+          <SearchBar />
+          <ReadingList />
+        </div>
       </div>
       <div className="overflow-hidden transition-[height] duration-300 ease-out" style={{ height: panelHeight }}>
         <div ref={contentRef} className="columns-4 py-2">
@@ -123,6 +127,53 @@ const SearchBar = () => {
       >
         <Search className="transition-[scale] group-hover:scale-120" size="24" />
       </button>
+    </div>
+  );
+};
+
+const ReadingList = () => {
+  const t = useTranslations();
+  const { readingList, removeFromReadingList } = useReadingList();
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div>
+      <button
+        className="flex cursor-pointer items-center gap-1 px-2 py-3 transition-colors hover:bg-white/20"
+        onClick={() => {
+          setIsOpen(!isOpen);
+        }}
+      >
+        <Star /> {t("readingList.readingList")} ({readingList.length})
+      </button>
+      {isOpen && (
+        <div className="fixed top-12 right-0 w-max max-w-100 bg-dark-bg px-4 py-2 opacity-100 transition-opacity starting:opacity-0">
+          <div className="text-center text-lg text-blue-3">{t("readingList.readingList")}</div>
+          {readingList.length === 0 && <div>{t("readingList.empty")}</div>}
+          {readingList.map((item) => (
+            <div
+              className="flex h-auto items-center justify-between gap-10 overflow-hidden transition-[height] [interpolate-size:allow-keywords] starting:h-0"
+              key={item.slug}
+            >
+              <a
+                className="hover:underline"
+                href={`${t("siteUrl")}/${item.slug}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {item.title}
+              </a>
+              <button
+                className="cursor-pointer"
+                onClick={() => {
+                  removeFromReadingList(item.slug);
+                }}
+              >
+                <X size="16" />
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
