@@ -13,7 +13,7 @@ export default getRequestConfig(async () => {
     notFound();
   }
 
-  const messages = match(locale)
+  const messages = match(paramValue)
     .with("zh-CN", () => zhCN)
     .otherwise(() => zhCN);
 

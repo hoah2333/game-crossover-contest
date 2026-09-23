@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { parseFtml } from "../ftml";
+import { parseFtml } from "@/app/lib/ftml";
 
 export const useParseFtml = (ftml: string): string => {
   const [html, setHtml] = useState<string>("");

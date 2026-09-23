@@ -1,20 +1,19 @@
 import { getTranslations } from "next-intl/server";
 import { Logo } from "@/app/components/logo";
 
-import type { _Translator } from "next-intl";
 import type { ReactNode } from "react";
 
-export const Footer = async () => {
-  const t = await getTranslations("footer");
+export const Footer = () => {
   return (
     <div className="flex w-dvw justify-center gap-40 bg-dark-bg py-10 text-text-dark">
-      <FooterLeft t={t} />
-      <FooterRight t={t} />
+      <FooterLeft />
+      <FooterRight />
     </div>
   );
 };
 
-const FooterLeft = ({ t }: { t: _Translator }) => {
+const FooterLeft = async () => {
+  const t = await getTranslations("footer");
   return (
     <div className="max-w-70">
       <Logo />
@@ -34,6 +33,7 @@ const licenceLink = (chunks: ReactNode) => (
   </a>
 );
 
-const FooterRight = ({ t }: { t: _Translator }) => {
+const FooterRight = async () => {
+  const t = await getTranslations("footer");
   return <div>{t("sponsers")}</div>;
 };
