@@ -8,14 +8,13 @@ import { clsx } from "clsx";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useCallback, useEffect, useState } from "react";
-import { match, P } from "ts-pattern";
+import { RatingTexts } from "@/app/components/rating/RatingTexts";
 import { useReadingList } from "@/app/lib/hooks/useReadingList";
 
 import type { EmblaCarouselType } from "embla-carousel";
-import type { ReactNode } from "react";
-import type { CarouselItem } from "./types";
+import type { ArticleItem } from "@/app/lib/types";
 
-export const CarouselClient = ({ items }: { items: CarouselItem[] }) => {
+export const CarouselClient = ({ items }: { items: ArticleItem[] }) => {
   // oxlint-disable-next-line react/hook-use-state
   const [autoplayState] = useState(
     // oxlint-disable-next-line react/capitalized-calls
@@ -101,14 +100,8 @@ export const CarouselClient = ({ items }: { items: CarouselItem[] }) => {
   );
 };
 
-const CarouselCard = ({ item }: { item: CarouselItem }) => {
+const CarouselCard = ({ item }: { item: ArticleItem }) => {
   const t = useTranslations();
-  const [now, setNow] = useState(0);
-
-  useEffect(() => {
-    // oxlint-disable-next-line react/set-state-in-effect
-    setNow(Date.now());
-  }, []);
 
   const { isInReadingList, addToReadingList, removeFromReadingList } = useReadingList();
 
@@ -136,30 +129,12 @@ const CarouselCard = ({ item }: { item: CarouselItem }) => {
                 {item.title}
               </a>
             </div>
-            <div className="flex gap-2 text-sm">
-              {item.ratingCount <= 15
-                ? match(item.postDate > now - 24 * 60 * 60 * 1000 * 15)
-                    .returnType<ReactNode>()
-                    .with(true, () => <div className="text-[#70b590]">{t("carousel.ratingTexts.latest")}</div>)
-                    .with(false, () => <div className="text-[#929396]">{t("carousel.ratingTexts.cold")}</div>)
-                    .exhaustive()
-                : match(item.rating / item.ratingCount)
-                    .returnType<ReactNode>()
-                    .with(P.number.lt(0.35), () => (
-                      <div className="text-[#be5d30]">{t("carousel.ratingTexts.negative")}</div>
-                    ))
-                    .with(P.number.gte(0.35).and(P.number.lt(0.65)), () => (
-                      <div className="text-[#ad9872]">{t("carousel.ratingTexts.mixed")}</div>
-                    ))
-                    .with(P.number.gte(0.65), () => (
-                      <div className="text-[#5197c3]">{t("carousel.ratingTexts.positive")}</div>
-                    ))
-                    .otherwise(() => (
-                      // 这个 otherwise 应该是 0/0 的情况
-                      <div className="text-[#929396]">{t("carousel.ratingTexts.cold")}</div>
-                    ))}
-              ({item.ratingCount})
-            </div>
+            <RatingTexts
+              className="text-sm"
+              rating={item.rating}
+              ratingCount={item.ratingCount}
+              postDate={item.postDate}
+            />
             <div className="flex flex-wrap gap-2 text-sm">
               {item.tags.slice(0, 10).map((tag) => (
                 <a

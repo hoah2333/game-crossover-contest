@@ -1,18 +1,19 @@
 import { load as cheerLoad } from "cheerio";
+import { cache } from "react";
 import { getListpages } from "@/app/lib/getListPages";
 
 import type { CheerioAPI } from "cheerio";
 import type { Element } from "domhandler";
-import type { CarouselItem } from "./types";
+import type { ArticleItem } from "@/app/lib/types";
 
-const getCarouselItemsSource = async () => {
+const getContestArticlesSource = async () => {
   const { status, body } = await getListpages({
     category: "*",
     order: "created_at",
     perPage: "250",
     separate: "false",
     tags: "+9000 -竞赛 -中心",
-    module_body: `[[div class="carousel-item"]]
+    module_body: `[[div class="contest-item"]]
       [[span class="slug"]]%%fullname%%[[/span]]
       [[span class="title"]]%%title%%[[/span]]
       [[span class="preview"]]%%content{2}%%[[/span]]
@@ -29,36 +30,37 @@ const getCarouselItemsSource = async () => {
   return null;
 };
 
-export const parseCarouselItemsFtml = async () => {
-  const carouselSource = await getCarouselItemsSource();
-  if (carouselSource === null) {
+export const parseContestArticlesFtml = cache(async () => {
+  const contestSource = await getContestArticlesSource();
+  if (contestSource === null) {
     return [];
   }
-  const carouselDom: CheerioAPI = cheerLoad(carouselSource);
-  const carouselItems: CarouselItem[] = carouselDom("div.carousel-item")
+  const contestDom: CheerioAPI = cheerLoad(contestSource);
+  const contestItems: ArticleItem[] = contestDom("div.contest-item")
     .map((_, itemElement: Element) => {
-      const itemDom = carouselDom(itemElement);
+      const itemDom = contestDom(itemElement);
       return {
         slug: itemDom.find("span.slug").text(),
         title: itemDom.find("span.title").text(),
-        description: itemDom.find("span.preview span.game-crossover-preview-description").text() ?? "",
-        rating: Number(itemDom.find("span.rating").text() ?? "0"),
-        ratingCount: Number(itemDom.find("span.rating-count").text() ?? "0"),
-        postDate: Number(
-          itemDom
-            .find("span.post-date span.odate")
-            .attr("class")
-            ?.match(/time_(?<time>\d+)/v)?.groups?.time ?? "0",
-        ),
+        description: itemDom.find("span.preview span.game-crossover-preview-description").text(),
+        rating: Number(itemDom.find("span.rating").text()),
+        ratingCount: Number(itemDom.find("span.rating-count").text()),
+        postDate:
+          Number(
+            itemDom
+              .find("span.post-date span.odate")
+              .attr("class")
+              ?.match(/time_(?<time>\d+)/v)?.groups?.time ?? "0",
+          ) * 1000,
         tags: itemDom
           .find("span.tags")
           .text()
           .split(" ")
           .filter((tag) => tag !== ""),
-        image: itemDom.find("span.preview span.game-crossover-preview-image").text() ?? "",
+        image: itemDom.find("span.preview span.game-crossover-preview-image").text(),
         authors: [itemDom.find("span.author").text()],
       };
     })
     .toArray();
-  return carouselItems;
-};
+  return contestItems;
+});

@@ -1,4 +1,4 @@
-export interface CarouselItem {
+export interface ArticleItem {
   slug: string;
   title: string;
   description: string;
