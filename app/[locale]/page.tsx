@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import { Suspense } from "react";
 import { Carousel } from "@/app/components/carousel";
+import { ContestList } from "@/app/components/contest-list";
 import { Footer } from "@/app/components/footer";
 import { Header } from "@/app/components/header";
 import { LoadGuard } from "@/app/components/loadGuard";
@@ -35,6 +36,9 @@ const IndexPage = ({ searchParams }: { searchParams: Promise<{ id: string }> }):
       <main className="z-2 mx-auto mt-100 w-full max-w-pc">
         <Suspense fallback={null}>
           <Carousel />
+        </Suspense>
+        <Suspense fallback={null}>
+          <ContestList />
         </Suspense>
         <div className="h-300" />
       </main>

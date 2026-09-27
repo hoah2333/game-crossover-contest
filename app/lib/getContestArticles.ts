@@ -20,7 +20,7 @@ const getContestArticlesSource = async () => {
       [[span class="rating"]]%%rating%%[[/span]]
       [[span class="rating-count"]]%%rating_votes%%[[/span]]
       [[span class="post-date"]]%%created_at%%[[/span]]
-      [[span class="tags"]]%%tags%%[[/span]]
+      [[span class="tags"]]%%tags%% %%_tags%%[[/span]]
       [[span class="author"]]%%created_by%%[[/span]]
       [[/div]]`,
   });

@@ -23,16 +23,21 @@
     "previous": "上一页",
     "next": "下一页",
     "gotoPage": "跳转到第 {page} 页",
-    "ratingTexts": {
-      "latest": "最新发布",
-      "cold": "冷门作品",
-      "negative": "多半差评",
-      "mixed": "褒贬不一",
-      "positive": "多半好评"
-    },
     "additionalTags": "+{count} 个标签",
     "createdBy": "由 {authors} 创作",
     "authors": "等 {count} 人"
+  },
+  "contestList": {
+    "tabs": { "scifi": "科幻作品（{count}）", "fantasy": "奇幻作品（{count}）", "magic": "魔幻作品（{count}）" },
+    "date": "发布于：{year} 年 {month} 月 {day} 日",
+    "more": "查看更多（还有 {count} 篇）"
+  },
+  "ratingTexts": {
+    "latest": "最新发布",
+    "cold": "冷门作品",
+    "negative": "多半差评",
+    "mixed": "褒贬不一",
+    "positive": "多半好评"
   },
   "footer": {
     "license": "除非特别注明，本页内容采用以下授权方式：<link>Creative Commons Attribution-ShareAlike 3.0 License</link>",
