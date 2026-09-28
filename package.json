@@ -12,7 +12,7 @@
     "format:check": "oxfmt --check"
   },
   "dependencies": {
-    "@hoah2333/wikidot-lib": "^0.0.12",
+    "@hoah2333/wikidot-lib": "^0.0.13",
     "@vscode-ftml/ftml-wasm": "1.42.1",
     "@wikijump/ftml-wasm": "file:D:\\wikijump\\web\\modules\\ftml-wasm\\dist",
     "cheerio": "^1.2.0",
