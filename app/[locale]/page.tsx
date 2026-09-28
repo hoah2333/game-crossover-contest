@@ -8,6 +8,7 @@ import { Header } from "@/app/components/header";
 import { LoadGuard } from "@/app/components/loadGuard";
 import { LoginStatus } from "@/app/components/login-status";
 import { Logo } from "@/app/components/logo";
+import { Recommend } from "@/app/components/recommend";
 import { SideBar } from "@/app/components/side-bar";
 
 import type { ReactElement } from "react";
@@ -39,6 +40,9 @@ const IndexPage = ({ searchParams }: { searchParams: Promise<{ id: string }> }):
         </Suspense>
         <Suspense fallback={null}>
           <ContestList />
+        </Suspense>
+        <Suspense fallback={null}>
+          <Recommend />
         </Suspense>
       </main>
       <footer>

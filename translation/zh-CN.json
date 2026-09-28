@@ -33,6 +33,7 @@
     "more": "查看更多（还有 {count} 篇）",
     "overall": "总体用户评测"
   },
+  "recommend": { "title": "社区推荐", "readFull": "阅读整篇评测", "unknownUser": "未知用户" },
   "ratingTexts": {
     "latest": "最新发布",
     "cold": "冷门作品",
