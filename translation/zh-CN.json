@@ -15,7 +15,7 @@
   },
   "readingList": {
     "readingList": "阅读清单",
-    "add": "添加至阅读清单",
+    "add": "加入阅读清单",
     "remove": "移出阅读清单",
     "empty": "阅读列表为空"
   },
@@ -30,7 +30,8 @@
   "contestList": {
     "tabs": { "scifi": "科幻作品（{count}）", "fantasy": "奇幻作品（{count}）", "magic": "魔幻作品（{count}）" },
     "date": "发布于：{year} 年 {month} 月 {day} 日",
-    "more": "查看更多（还有 {count} 篇）"
+    "more": "查看更多（还有 {count} 篇）",
+    "overall": "总体用户评测"
   },
   "ratingTexts": {
     "latest": "最新发布",
