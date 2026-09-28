@@ -16,7 +16,9 @@ const getContestArticlesSource = async () => {
     module_body: `[[div class="contest-item"]]
       [[span class="slug"]]%%fullname%%[[/span]]
       [[span class="title"]]%%title%%[[/span]]
-      [[span class="preview"]]%%content{2}%%[[/span]]
+      [[div class="preview"]]
+      %%content{2}%%
+      [[/div]]
       [[span class="rating"]]%%rating%%[[/span]]
       [[span class="rating-count"]]%%rating_votes%%[[/span]]
       [[span class="post-date"]]%%created_at%%[[/span]]
@@ -42,7 +44,6 @@ export const parseContestArticlesFtml = cache(async () => {
       return {
         slug: itemDom.find("span.slug").text(),
         title: itemDom.find("span.title").text(),
-        description: itemDom.find("span.preview span.game-crossover-preview-description").text(),
         rating: Number(itemDom.find("span.rating").text()),
         ratingCount: Number(itemDom.find("span.rating-count").text()),
         postDate:
@@ -57,7 +58,25 @@ export const parseContestArticlesFtml = cache(async () => {
           .text()
           .split(" ")
           .filter((tag) => tag !== ""),
-        image: itemDom.find("span.preview span.game-crossover-preview-image").text(),
+        carouselBanner: itemDom.find("div.preview div.game-crossover-preview-carousel-banner").text().trim(),
+        contestListBanner: itemDom.find("div.preview div.game-crossover-preview-contest-list-banner").text().trim(),
+        images: itemDom
+          .find("div.preview div.game-crossover-preview-image")
+          .text()
+          .trim()
+          .split("\n")
+          .map((image) => image.trim())
+          .filter((image) => image !== ""),
+        review: {
+          text: itemDom.find("div.preview div.game-crossover-preview-review").text().trim(),
+          link: itemDom.find("div.preview div.game-crossover-preview-review-link").text().trim(),
+          reviewer: Number(
+            itemDom
+              .find("div.preview div.game-crossover-preview-reviewer span.printuser a:first-of-type")
+              .attr("onclick")
+              ?.match(/WIKIDOT\.page\.listeners\.userInfo\((?<userId>\d+)\)/v)?.groups?.userId,
+          ),
+        },
         authors: [itemDom.find("span.author").text()],
       };
     })

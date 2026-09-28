@@ -121,7 +121,7 @@ const ContestListRow = ({
       <div className="aspect-8/3 w-full shrink-0 overflow-hidden md:w-60">
         <Image
           className="size-full object-cover"
-          src={articleItem.image === "" ? "/contest-list-banner.png" : articleItem.image}
+          src={articleItem.contestListBanner === "" ? "/contest-list-banner.png" : articleItem.contestListBanner}
           alt={articleItem.title}
           sizes="(min-width: 768px) 240px, 100vw"
           width={240}
@@ -206,13 +206,9 @@ const ContestListPanel = ({ articleItem }: { articleItem: ArticleItem }) => {
         {isInReadingList(articleItem.slug) ? t("readingList.remove") : t("readingList.add")}
       </button>
       <div>
-        <Image
-          src={articleItem.image === "" ? "/carousel-banner.png" : articleItem.image}
-          alt={articleItem.title}
-          sizes="328px"
-          width={328}
-          height={123}
-        />
+        {articleItem.images.map((i) => (
+          <Image src={i} alt={articleItem.title} sizes="328px" width={328} height={123} key={i} />
+        ))}
       </div>
     </div>
   );
