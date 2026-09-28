@@ -6,6 +6,7 @@ import { clsx } from "clsx";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { RatingTexts } from "@/app/components/rating/RatingTexts";
+import { getDate } from "@/app/lib/getDate";
 import { useReadingList } from "@/app/lib/hooks/useReadingList";
 
 import type { ArticleItem } from "@/app/lib/types";
@@ -104,7 +105,6 @@ const ContestListRow = ({
   onSelect: () => void;
 }) => {
   const t = useTranslations();
-  const date = getDate(articleItem.postDate);
 
   return (
     <a
@@ -140,7 +140,7 @@ const ContestListRow = ({
               ))}
             </div>
           </div>
-          <div className="text-sm text-text-dark">{t("contestList.date", date)}</div>
+          <div className="text-sm text-text-dark">{t("contestList.date", getDate(articleItem.postDate))}</div>
         </div>
         <div className="flex shrink-0 items-end justify-end px-4 py-2 text-right text-sm text-white">
           {t("carousel.createdBy", {
@@ -215,19 +215,3 @@ const ContestListPanel = ({ articleItem }: { articleItem: ArticleItem }) => {
 };
 
 const getVisibleTags = (tags: string[]) => tags.filter((tag) => !(tag.startsWith("_") || tag === "9000"));
-
-const formatter = new Intl.DateTimeFormat("zh-CN", {
-  timeZone: "Asia/Shanghai",
-  year: "numeric",
-  month: "numeric",
-  day: "numeric",
-});
-
-const getDate = (timestamp: number) => {
-  const parts = formatter.formatToParts(new Date(timestamp));
-  return {
-    year: parts.find((part) => part.type === "year")?.value ?? "",
-    month: parts.find((part) => part.type === "month")?.value ?? "",
-    day: parts.find((part) => part.type === "day")?.value ?? "",
-  };
-};
