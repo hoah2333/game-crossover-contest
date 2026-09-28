@@ -7,8 +7,7 @@ import { Dropdown } from "./Dropdown";
 
 export const LoginStatus = async ({ userId }: { userId: number }) => {
   const userInfo = userId > 0 ? await getUserInfo(userId) : null;
-  const t = await getTranslations("loginStatus");
-  const url = await getTranslations();
+  const t = await getTranslations();
 
   return (
     <div className="text-sm text-text-dark">
@@ -16,19 +15,19 @@ export const LoginStatus = async ({ userId }: { userId: number }) => {
         {userInfo === null ? (
           <>
             <a
-              href={`https://www.wikidot.com/default--flow/login__LoginPopupScreen?openerUri=${url("siteUrl")}`}
+              href={`https://www.wikidot.com/default--flow/login__LoginPopupScreen?openerUri=${t("siteUrl")}`}
               target="_blank"
               className="cursor-pointer transition-colors hover:text-white"
             >
-              {t("login")}
+              {t("loginStatus.login")}
             </a>
             <span>|</span>
             <a
-              href={`https://www.wikidot.com/default--flow/login__CreateAccountScreen?openerUri=${url("siteUrl")}`}
+              href={`https://www.wikidot.com/default--flow/login__CreateAccountScreen?openerUri=${t("siteUrl")}`}
               target="_blank"
               className="cursor-pointer transition-colors hover:text-white"
             >
-              {t("register")}
+              {t("loginStatus.register")}
             </a>
           </>
         ) : (
@@ -37,23 +36,23 @@ export const LoginStatus = async ({ userId }: { userId: number }) => {
               <Bell size={14} />
             </button>
             <div className="mt-0.5 flex flex-col items-end gap-1 text-xs">
-              <Dropdown username={userInfo.userName} />
+              <Dropdown username={userInfo.displayName} />
               <a
                 href="https://www.wikidot.com/account/activity"
                 target="_blank"
                 className="cursor-pointer transition-colors hover:text-white"
               >
-                {t("myAccount")}
+                {t("loginStatus.myAccount")}
               </a>
             </div>
 
             <div className="flex items-center border border-online">
               <Image
-                src={`http://www.wikidot.com/avatar.php?userid=${userInfo.userId}`}
-                alt={`the Avatar of ${userInfo.userName}`}
+                src={`http://www.wikidot.com/avatar.php?userid=${userInfo.wikidotId}`}
+                alt={`the Avatar of ${userInfo.displayName}`}
                 width={40}
                 height={40}
-                className="h-10 w-10"
+                className="size-10"
               />
             </div>
           </>
