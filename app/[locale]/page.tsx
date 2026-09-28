@@ -40,7 +40,6 @@ const IndexPage = ({ searchParams }: { searchParams: Promise<{ id: string }> }):
         <Suspense fallback={null}>
           <ContestList />
         </Suspense>
-        <div className="h-300" />
       </main>
       <footer>
         <Footer />

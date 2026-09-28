@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 
 export const Footer = () => {
   return (
-    <div className="flex w-dvw justify-center gap-40 bg-dark-bg py-10 text-text-dark">
+    <div className="flex w-full mt-4 justify-center gap-40 bg-dark-bg py-10 text-text-dark">
       <FooterLeft />
       <FooterRight />
     </div>

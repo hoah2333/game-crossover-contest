@@ -54,47 +54,45 @@ export const CarouselClient = ({ items }: { items: ArticleItem[] }) => {
   }, [emblaApi, setupSnaps]);
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="-mx-16 flex flex-col gap-4">
       <div className="flex">
         <button
-          className="cursor-pointer text-white hover:bg-white/30"
+          className="cursor-pointer text-text-dark transition-colors hover:text-white"
           aria-label={t("carousel.previous")}
           title={t("carousel.previous")}
           onClick={() => emblaApi?.scrollPrev()}
         >
-          <ChevronLeft className="size-10" />
+          <ChevronLeft className="size-16" />
         </button>
         <div className="min-w-0 flex-1 overflow-hidden" ref={emblaRef}>
           <div className="-ml-4 flex touch-pan-y touch-pinch-zoom">
-            {items.map((item) => {
-              return <CarouselCard item={item} key={item.slug} />;
-            })}
+            {items.map((item) => (
+              <CarouselCard item={item} key={item.slug} />
+            ))}
           </div>
         </div>
         <button
-          className="cursor-pointer text-white hover:bg-white/30"
+          className="cursor-pointer text-text-dark transition-colors hover:text-white"
           aria-label={t("carousel.next")}
           title={t("carousel.next")}
           onClick={() => emblaApi?.scrollNext()}
         >
-          <ChevronRight className="size-10" />
+          <ChevronRight className="size-16" />
         </button>
       </div>
       <div className="flex justify-center gap-2 text-white">
-        {scrollSnaps.map((_, index) => {
-          return (
-            <button
-              className="cursor-pointer"
-              onClick={() => emblaApi?.scrollTo(index)}
-              aria-label={t("carousel.gotoPage", { page: index + 1 })}
-              title={t("carousel.gotoPage", { page: index + 1 })}
-              // oxlint-disable-next-line react/no-array-index-key
-              key={index}
-            >
-              <div className={clsx("h-2 w-4 rounded-full", currentPage === index ? "bg-blue-1" : "bg-border-1")} />
-            </button>
-          );
-        })}
+        {scrollSnaps.map((_, index) => (
+          <button
+            className="cursor-pointer"
+            onClick={() => emblaApi?.scrollTo(index)}
+            aria-label={t("carousel.gotoPage", { page: index + 1 })}
+            title={t("carousel.gotoPage", { page: index + 1 })}
+            // oxlint-disable-next-line react/no-array-index-key
+            key={index}
+          >
+            <div className={clsx("h-2 w-4 rounded-full", currentPage === index ? "bg-blue-1" : "bg-border-1")} />
+          </button>
+        ))}
       </div>
     </div>
   );
