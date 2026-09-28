@@ -45,15 +45,15 @@ export const SideBar = ({ sideNav }: { sideNav: SideBarType }) => {
           // oxlint-disable-next-line react/no-array-index-key
           <div dir="ltr" className="mb-2 bg-dark-bg-2 p-2" key={`${sideBlock.type}-${index}`}>
             {sideBlock.type === "nav" &&
-              (sideBlock.collapsible ? (
+              (sideBlock.collapsible === false ? (
+                <NavBlock sideBlock={sideBlock} />
+              ) : (
                 <details className="group">
                   <summary className="mb-1 cursor-pointer group-not-open:px-1 group-open:border-b group-open:border-blue-3 group-open:text-sm group-open:font-bold group-open:text-blue-3 marker:content-[''] group-not-open:hover:bg-white/30">
                     {sideBlock.collapsible.show}
                   </summary>
                   <NavBlock sideBlock={sideBlock} />
                 </details>
-              ) : (
-                <NavBlock sideBlock={sideBlock} />
               ))}
             {sideBlock.type === "media" && <MediaBlock sideBlock={sideBlock} />}
             {sideBlock.type === "license" && <LicenseBlock sideBlock={sideBlock} />}
@@ -63,7 +63,9 @@ export const SideBar = ({ sideNav }: { sideNav: SideBarType }) => {
       {isOpen && (
         <button
           className="fixed top-0 left-0 z-10 h-screen w-screen bg-black/50 transition-colors duration-300 starting:bg-transparent"
-          onClick={() => setIsOpen(false)}
+          onClick={() => {
+            setIsOpen(false);
+          }}
           onKeyDown={(event: KeyboardEvent<HTMLButtonElement>) => {
             if (event.key === "Escape" || event.key === " " || event.key === "Enter") {
               setIsOpen(false);
