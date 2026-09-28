@@ -8,6 +8,6 @@ export interface ArticleItem {
   carouselBanner: string;
   contestListBanner: string;
   images: string[];
-  review: { text: string; link: string; reviewer: number };
+  reviewId: number;
   authors: string[];
 }

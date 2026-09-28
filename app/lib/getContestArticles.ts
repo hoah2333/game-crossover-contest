@@ -67,16 +67,7 @@ export const parseContestArticlesFtml = cache(async () => {
           .split("\n")
           .map((image) => image.trim())
           .filter((image) => image !== ""),
-        review: {
-          text: itemDom.find("div.preview div.game-crossover-preview-review").text().trim(),
-          link: itemDom.find("div.preview div.game-crossover-preview-review-link").text().trim(),
-          reviewer: Number(
-            itemDom
-              .find("div.preview div.game-crossover-preview-reviewer span.printuser a:first-of-type")
-              .attr("onclick")
-              ?.match(/WIKIDOT\.page\.listeners\.userInfo\((?<userId>\d+)\)/v)?.groups?.userId,
-          ),
-        },
+        reviewId: Number(itemDom.find("div.preview div.game-crossover-preview-review").text().trim()),
         authors: [itemDom.find("span.author").text()],
       };
     })
