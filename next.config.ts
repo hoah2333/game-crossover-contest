@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [{ hostname: "*.wikidot.com" }, { hostname: "*.scpwikicn.com" }, { hostname: "*.wdfiles.com" }],
   },
+  output: "standalone",
   turbopack: { rules: { "*.svg": { loaders: ["@svgr/webpack"], as: "*.js" } } },
   cacheComponents: true,
 };
