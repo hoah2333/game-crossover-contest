@@ -32,23 +32,23 @@ const RecommendCard = ({ item }: { item: RecommendItem }) => {
     )
     .otherwise(() => item.article.images[0]);
   return (
-    <div className="flex min-w-0 shrink-0 grow-0 basis-full bg-dark-bg pl-4">
+    <div className="flex min-w-0 shrink-0 grow-0 basis-full flex-col bg-dark-bg pl-4 lg:flex-row">
       <a
         href={`${t("siteUrl")}/${item.article.slug}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="aspect-video w-full shrink-0 basis-1/2 overflow-hidden"
+        className="aspect-video w-full shrink-0 overflow-hidden lg:basis-1/2"
       >
         <Image
           className="size-full object-cover"
           src={bannerImage}
           alt={item.article.title}
-          sizes="(min-width: 768px) 600px, 100vw"
+          sizes="(min-width: 1024px) 600px, 100vw"
           width={600}
           height={338}
         />
       </a>
-      <div className="flex basis-1/2 flex-col justify-between p-4 text-white">
+      <div className="flex flex-col justify-between p-4 text-white lg:basis-1/2">
         <div className="flex flex-col gap-2">
           <a
             href={`${t("siteUrl")}/${item.article.slug}`}
@@ -60,7 +60,7 @@ const RecommendCard = ({ item }: { item: RecommendItem }) => {
           </a>
           <div className="line-clamp-6 max-h-34 overflow-hidden">{item.review.textContent}</div>
           <a
-            className="relative -mt-2 flex w-full justify-center bg-dark-bg p-2 text-sm text-text-dark transition-colors hover:text-white"
+            className="-mt-2 flex w-full justify-center bg-dark-bg p-2 text-sm text-text-dark transition-colors hover:text-white"
             href={`${t("siteUrl")}/forum/t-${item.review.threadId}#post-${item.review.postId}`}
             target="_blank"
             rel="noopener noreferrer"
