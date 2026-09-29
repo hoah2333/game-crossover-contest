@@ -53,8 +53,8 @@ const TopBar = ({
 
   return (
     <>
-      <div className="flex items-start justify-between">
-        <div className="flex gap-4 text-sm">
+      <div className="flex flex-col items-end justify-between lg:flex-row lg:items-start">
+        <div className="flex flex-wrap gap-4 text-sm">
           {topNav.map((item: TopBarItem, index: number): JSX.Element => (
             <button
               key={`top-bar-item-${item.name}`}
@@ -85,7 +85,7 @@ const TopBar = ({
             </button>
           ))}
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-1 justify-end gap-2">
           <SearchBar />
           <ReadingList />
         </div>
@@ -113,7 +113,7 @@ const TopBar = ({
 const SearchBar = () => {
   const t = useTranslations();
   return (
-    <div className="my-1 flex text-sm">
+    <div className="my-1 flex shrink-0 text-sm">
       <input
         className="w-80 border border-border-1 bg-dark-bg-2 p-2 placeholder:italic focus-within:border-blue-1 focus-visible:outline-none"
         name="search-bar"
@@ -136,7 +136,7 @@ const ReadingList = () => {
   const { readingList, removeFromReadingList } = useReadingList();
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div>
+    <div className="shrink-0">
       <button
         className="flex cursor-pointer items-center gap-1 px-2 py-3 transition-colors hover:bg-white/20"
         onClick={() => {

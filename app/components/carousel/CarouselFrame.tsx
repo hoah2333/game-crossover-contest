@@ -47,27 +47,27 @@ export const CarouselFrame = ({
   }, [emblaApi, setupSnaps]);
 
   return (
-    <div className="-mx-16 flex flex-col gap-4">
-      {title !== "" && <div className="ml-16 text-2xl -mb-2 mt-6 font-bold text-white">{title}</div>}
+    <div className="flex flex-col gap-4 xl:-mx-12 2xl:-mx-16">
+      {title !== "" && <div className="mt-6 -mb-2 text-2xl font-bold text-white xl:ml-12 2xl:ml-16">{title}</div>}
       <div className="flex">
         <button
-          className="cursor-pointer text-text-dark transition-colors hover:text-white"
+          className="hidden cursor-pointer text-text-dark transition-colors hover:text-white xl:block"
           aria-label={t("carousel.previous")}
           title={t("carousel.previous")}
           onClick={() => emblaApi?.scrollPrev()}
         >
-          <ChevronLeft className="size-16" />
+          <ChevronLeft className="size-12 2xl:size-16" />
         </button>
         <div className="min-w-0 flex-1 overflow-hidden" ref={emblaRef}>
           <div className="-ml-4 flex touch-pan-y touch-pinch-zoom">{children}</div>
         </div>
         <button
-          className="cursor-pointer text-text-dark transition-colors hover:text-white"
+          className="hidden cursor-pointer text-text-dark transition-colors hover:text-white xl:block"
           aria-label={t("carousel.next")}
           title={t("carousel.next")}
           onClick={() => emblaApi?.scrollNext()}
         >
-          <ChevronRight className="size-16" />
+          <ChevronRight className="size-12 2xl:size-16" />
         </button>
       </div>
       <div className="flex justify-center gap-2 text-white">
