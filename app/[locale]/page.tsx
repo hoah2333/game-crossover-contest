@@ -10,6 +10,7 @@ import { LoginStatus } from "@/app/components/login-status";
 import { Logo } from "@/app/components/logo";
 import { LowRating } from "@/app/components/low-rating";
 import { Recommend } from "@/app/components/recommend";
+import { Rules } from "@/app/components/rules";
 import { SideBar } from "@/app/components/side-bar";
 
 import type { ReactElement } from "react";
@@ -48,6 +49,7 @@ const IndexPage = ({ searchParams }: { searchParams: Promise<{ id: string }> }):
         <Suspense fallback={null}>
           <LowRating />
         </Suspense>
+        <Rules />
       </main>
       <footer>
         <Footer />

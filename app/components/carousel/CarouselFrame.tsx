@@ -70,7 +70,7 @@ export const CarouselFrame = ({
           <ChevronRight className="size-12 2xl:size-16" />
         </button>
       </div>
-      <div className="flex justify-center gap-2 text-white">
+      <div className="flex flex-wrap justify-center gap-2 text-white">
         {scrollSnaps.map((_, index) => (
           <button
             className="cursor-pointer"
