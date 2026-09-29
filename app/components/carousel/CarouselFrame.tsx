@@ -48,7 +48,7 @@ export const CarouselFrame = ({
 
   return (
     <div className="-mx-16 flex flex-col gap-4">
-      {title !== "" && <div className="ml-16 text-2xl font-bold text-white">{title}</div>}
+      {title !== "" && <div className="ml-16 text-2xl -mb-2 mt-6 font-bold text-white">{title}</div>}
       <div className="flex">
         <button
           className="cursor-pointer text-text-dark transition-colors hover:text-white"
