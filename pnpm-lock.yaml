@@ -170,14 +170,11 @@ importers:
         specifier: ^0.27.20
         version: 0.27.20(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@hoah2333/wikidot-lib':
-        specifier: ^0.0.13
-        version: 0.0.13
+        specifier: ^0.0.14
+        version: 0.0.14
       '@vscode-ftml/ftml-wasm':
         specifier: 1.42.2
         version: 1.42.2
-      '@wikijump/ftml-wasm':
-        specifier: file:D:\wikijump\web\modules\ftml-wasm\dist
-        version: file:../../wikijump/web/modules/ftml-wasm/dist
       cheerio:
         specifier: ^1.2.0
         version: 1.2.0
@@ -884,8 +881,8 @@ packages:
   '@formatjs/intl-localematcher@0.8.13':
     resolution: {integrity: sha512-kHEAFOkeJSPNi7c5PaKaRjxcBrJwzzt81ifUu+8uve1EDW/VJl83KsxmqgqNZLzcFEhSliZGvx3+pk/RH0IOmg==}
 
-  '@hoah2333/wikidot-lib@0.0.13':
-    resolution: {integrity: sha512-BuEjrqJhub8t0kQp8TZpGuxluhgF+rEOgwA9A4fGn2uE/lj/Hpg/GsMVMAiXkRblz17TIzbKswmWFMbr8xSPyQ==}
+  '@hoah2333/wikidot-lib@0.0.14':
+    resolution: {integrity: sha512-q9+zjwcGDcd3zdVtpmb/CAPeXTv7EJpchqFcgXVFtsIDrP/vXhbBcOHkM92o+qnVL4dp9L+hGZgDnO/yr/CfBQ==}
 
   '@img/colour@1.1.0':
     resolution: {integrity: sha512-Td76q7j57o/tLVdgS746cYARfSyxk8iEfRxewL9h4OMzYhbW4TAcppl0mT4eyqXddh6L/jwoM75mo7ixa/pCeQ==}
@@ -1883,9 +1880,6 @@ packages:
 
   '@vscode-ftml/ftml-wasm@1.42.2':
     resolution: {integrity: sha512-jklDdmbytxfvQQzjnWxEeYCri+Ksp9uPuaBydu3YO+fy+dg9Zn0NriBp00nlH0I3i7ODk2Q/XXG28+DTSNaz2A==}
-
-  '@wikijump/ftml-wasm@file:../../wikijump/web/modules/ftml-wasm/dist':
-    resolution: {directory: ../../wikijump/web/modules/ftml-wasm/dist, type: directory}
 
   argparse@2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
@@ -3427,7 +3421,7 @@ snapshots:
     dependencies:
       '@formatjs/fast-memoize': 3.1.7
 
-  '@hoah2333/wikidot-lib@0.0.13':
+  '@hoah2333/wikidot-lib@0.0.14':
     dependencies:
       cheerio: 1.2.0
       ts-pattern: 5.9.0
@@ -4079,8 +4073,6 @@ snapshots:
     optional: true
 
   '@vscode-ftml/ftml-wasm@1.42.2': {}
-
-  '@wikijump/ftml-wasm@file:../../wikijump/web/modules/ftml-wasm/dist': {}
 
   argparse@2.0.1: {}
 

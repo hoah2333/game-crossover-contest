@@ -13,9 +13,8 @@
   },
   "dependencies": {
     "@floating-ui/react": "^0.27.20",
-    "@hoah2333/wikidot-lib": "^0.0.13",
+    "@hoah2333/wikidot-lib": "^0.0.14",
     "@vscode-ftml/ftml-wasm": "1.42.2",
-    "@wikijump/ftml-wasm": "file:D:\\wikijump\\web\\modules\\ftml-wasm\\dist",
     "cheerio": "^1.2.0",
     "clsx": "^2.1.1",
     "embla-carousel-autoplay": "^8.6.0",
