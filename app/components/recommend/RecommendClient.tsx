@@ -29,7 +29,7 @@ const RecommendCard = ({ item }: { item: RecommendItem }) => {
   const recommender = item.review.createdBy;
   const bannerImage = match(item.article.images[0])
     .with(P.nullish, "", () =>
-      item.article.carouselBanner === "" ? "/carousel-banner.png" : item.article.carouselBanner,
+      item.article.carouselBanner === "" ? "/no-image-16.9.png" : item.article.carouselBanner,
     )
     .otherwise(() => item.article.images[0]);
   return (

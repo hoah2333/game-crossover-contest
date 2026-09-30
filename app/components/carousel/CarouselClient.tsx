@@ -46,7 +46,7 @@ const CarouselCard = ({ item }: { item: ArticleItem }) => {
         <a className="cursor-pointer" href={`${t("siteUrl")}/${item.slug}`} target="_blank" rel="noopener noreferrer">
           <Image
             className="object-cover"
-            src={item.carouselBanner === "" ? "/carousel-banner.png" : item.carouselBanner}
+            src={item.carouselBanner === "" ? "/no-image-5.6.png" : item.carouselBanner}
             alt={item.title}
             width={500}
             height={600}

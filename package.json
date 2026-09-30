@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@floating-ui/react": "^0.27.20",
-    "@hoah2333/wikidot-lib": "^0.0.14",
+    "@hoah2333/wikidot-lib": "^0.0.15",
     "@vscode-ftml/ftml-wasm": "1.42.2",
     "cheerio": "^1.2.0",
     "clsx": "^2.1.1",

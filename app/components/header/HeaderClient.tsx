@@ -90,8 +90,14 @@ const TopBar = ({
           <ReadingList />
         </div>
       </div>
-      <div className="overflow-hidden transition-[height] duration-300 ease-out" style={{ height: panelHeight }}>
-        <div ref={contentRef} className="columns-4 py-2">
+      <div
+        className={clsx(
+          "absolute top-full left-0 w-full overflow-hidden bg-dark-bg transition-[height] duration-300 ease-out",
+          panelHeight === 0 ? "pointer-events-none" : "pointer-events-auto",
+        )}
+        style={{ height: panelHeight }}
+      >
+        <div ref={contentRef} className="mx-auto w-full max-w-pc columns-4 py-2">
           {hoveringItem !== null &&
             topNav[hoveringItem]?.children.map((child: TopBarItemChild): JSX.Element => (
               <a

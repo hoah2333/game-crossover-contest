@@ -26,7 +26,7 @@ export const LowRatingClient = ({ items }: { items: ArticleItem[] }) => {
 const LowRatingCard = ({ item }: { item: ArticleItem }) => {
   const t = useTranslations();
   const bannerImage = match(item.images[0])
-    .with(P.nullish, "", () => (item.carouselBanner === "" ? "/carousel-banner.png" : item.carouselBanner))
+    .with(P.nullish, "", () => (item.carouselBanner === "" ? "/no-image-16.9.png" : item.carouselBanner))
     .otherwise(() => item.images[0]);
   return (
     <div className="flex min-w-0 shrink-0 grow-0 basis-1/2 flex-col pl-4 lg:basis-1/5">

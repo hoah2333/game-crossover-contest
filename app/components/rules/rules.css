@@ -1,0 +1,150 @@
+.wj-user-info {
+  display: inline-flex;
+  margin: 0 0.25rem;
+
+  .wj-user-info-link {
+    display: inline-flex;
+    gap: 0.25rem;
+
+    .wj-karma {
+      display: none;
+    }
+
+    .wj-user-info-avatar {
+      margin-top: 0;
+      margin-bottom: 0;
+      width: 1rem;
+      height: 1rem;
+      object-fit: cover;
+    }
+
+    .wj-user-info-name {
+      line-height: 1;
+    }
+  }
+}
+
+.wj-align-center {
+  text-align: center;
+}
+
+.wj-footnote-ref {
+  position: relative;
+
+  .wj-footnote-ref-marker {
+    position: relative;
+    font-size: smaller;
+    vertical-align: top;
+    top: -0.5rem;
+    color: var(--color-red-300);
+    cursor: pointer;
+  }
+
+  .wj-footnote-ref-tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 100%;
+    background-color: var(--color-dark-bg);
+    padding: 0.5rem;
+    max-width: 30rem;
+    width: max-content;
+    display: none;
+    flex-direction: column;
+  }
+
+  &:hover {
+    .wj-footnote-ref-tooltip {
+      display: flex;
+    }
+  }
+}
+
+.wj-tabs {
+  display: flex;
+  flex-direction: column;
+
+  .wj-tabs-button-list {
+    display: flex;
+
+    .wj-tabs-button {
+      flex: 1;
+      height: 8rem;
+      display: flex;
+      cursor: pointer;
+      justify-content: center;
+      align-items: flex-end;
+      background-color: var(--color-dark-bg);
+      transition: background-color 0.2s ease-in-out;
+      background-size: 6rem;
+      background-repeat: no-repeat;
+      background-position: top;
+
+      &:hover {
+        background-color: color-mix(in srgb, var(--color-dark-bg) 80%, white 20%);
+      }
+
+      &[aria-selected="true"] {
+        background-color: var(--color-dark-bg-2);
+      }
+
+      &:nth-of-type(1) {
+        background-image: url("/scifi-icon.webp");
+      }
+      &:nth-of-type(2) {
+        background-image: url("/magic-icon.webp");
+      }
+      &:nth-of-type(3) {
+        background-image: url("/fantasy-icon.webp");
+      }
+    }
+  }
+
+  .wj-tabs-panel-list {
+    display: flex;
+
+    .wj-tabs-panel {
+      background-color: var(--color-dark-bg-2);
+      padding: 0 1rem;
+    }
+  }
+}
+
+.wj-table {
+  td,
+  th {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--color-border-1);
+  }
+  th {
+    text-align: center;
+    background-color: var(--color-dark-bg-2);
+  }
+  td {
+    background-color: var(--color-dark-bg);
+  }
+}
+
+.wj-footnote-list {
+  display: none;
+}
+
+.prose {
+  h1 {
+    font-size: 2rem;
+    margin-top: 1rem;
+    color: var(--color-blue-3);
+  }
+  ul {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  li {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+
+    &::marker {
+      color: white;
+    }
+  }
+}

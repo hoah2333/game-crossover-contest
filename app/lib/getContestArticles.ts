@@ -1,4 +1,5 @@
 import { load as cheerLoad } from "cheerio";
+import { cacheLife } from "next/cache";
 import { cache } from "react";
 import { getListpages } from "@/app/lib/getListPages";
 
@@ -7,12 +8,15 @@ import type { Element } from "domhandler";
 import type { ArticleItem } from "@/app/lib/types";
 
 const getContestArticlesSource = async () => {
+  "use cache";
+  cacheLife({ stale: 60, revalidate: 300, expire: 3600 });
+
   const { status, body } = await getListpages({
     category: "*",
     order: "created_at",
     perPage: "250",
     separate: "false",
-    tags: "+9000 -竞赛 -中心",
+    tags: "+2026电子游戏竞赛 -竞赛 -中心",
     module_body: `[[div class="contest-item"]]
       [[span class="slug"]]%%fullname%%[[/span]]
       [[span class="title"]]%%title%%[[/span]]

@@ -1,4 +1,4 @@
-import SteamLogo from "@/public/steam-logo.svg";
+import Image from "next/image";
 
 import { clsx } from "clsx";
 import { getTranslations } from "next-intl/server";
@@ -8,7 +8,7 @@ export const Logo = async ({ className }: { className?: string }) => {
   return (
     <a className={clsx("flex items-center gap-2", className)} href={t("siteUrl")} target="_top">
       <div className="size-16">
-        <SteamLogo />
+        <Image src="/logo.png" alt="logo" width={64} height={64} />
       </div>
       <div>
         <div className="text-2xl font-bold">{t("scp.name")}</div>

@@ -7,6 +7,7 @@
   --container-pc: 1200px;
 
   --color-page-bg: oklch(0.2436 0.059 267.97);
+  --color-header-bg: oklch(0.2284 0.018 255.71);
   --color-dark-bg: oklch(0.2746 0.0314 258.32);
   --color-dark-bg-2: oklch(0.349 0.0243 255.68);
   --color-menu-bg: oklch(0.385 0.0225 261.24);

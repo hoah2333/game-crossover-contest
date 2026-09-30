@@ -121,7 +121,7 @@ const ContestListRow = ({
       <div className="aspect-8/3 w-full shrink-0 overflow-hidden md:w-60">
         <Image
           className="size-full object-cover"
-          src={articleItem.contestListBanner === "" ? "/contest-list-banner.png" : articleItem.contestListBanner}
+          src={articleItem.contestListBanner === "" ? "/no-image-8.3.png" : articleItem.contestListBanner}
           alt={articleItem.title}
           sizes="(min-width: 768px) 240px, 100vw"
           width={240}

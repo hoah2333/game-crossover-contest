@@ -1,6 +1,5 @@
-import Image from "next/image";
-
 import { Suspense } from "react";
+import { BannerPicture } from "@/app/components/banner-picture";
 import { Carousel } from "@/app/components/carousel";
 import { ContestList } from "@/app/components/contest-list";
 import { Footer } from "@/app/components/footer";
@@ -18,10 +17,10 @@ import type { ReactElement } from "react";
 const IndexPage = ({ searchParams }: { searchParams: Promise<{ id: string }> }): ReactElement => {
   return (
     <div className="relative flex flex-col bg-page-bg">
-      <div className="h-20" />
+      <div className="z-2 h-20 w-full bg-header-bg" />
       <Header />
       <header className="absolute top-0">
-        <div className="absolute top-0 w-full">
+        <div className="absolute top-0 z-3 w-full">
           <div className="mx-auto flex w-full max-w-pc justify-between">
             <Logo className="text-white" />
             <Suspense fallback={null}>
@@ -32,11 +31,11 @@ const IndexPage = ({ searchParams }: { searchParams: Promise<{ id: string }> }):
         <div className="absolute top-0 left-0">
           <SideBar />
         </div>
-        <div>
-          <Image src="/banner.png" alt="banner" loading="eager" width={3000} height={1000} />
+        <div className="mt-20">
+          <BannerPicture />
         </div>
       </header>
-      <main className="z-2 mx-auto mt-100 w-full max-w-pc">
+      <main className="z-2 mx-auto mt-70 w-full max-w-pc sm:mt-110 lg:mt-110 xl:mt-160">
         <Suspense fallback={null}>
           <Carousel />
         </Suspense>
@@ -49,7 +48,9 @@ const IndexPage = ({ searchParams }: { searchParams: Promise<{ id: string }> }):
         <Suspense fallback={null}>
           <LowRating />
         </Suspense>
-        <Rules />
+        <Suspense fallback={null}>
+          <Rules />
+        </Suspense>
       </main>
       <footer>
         <Footer />

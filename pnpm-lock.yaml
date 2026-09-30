@@ -170,8 +170,8 @@ importers:
         specifier: ^0.27.20
         version: 0.27.20(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
       '@hoah2333/wikidot-lib':
-        specifier: ^0.0.14
-        version: 0.0.14
+        specifier: ^0.0.15
+        version: 0.0.15
       '@vscode-ftml/ftml-wasm':
         specifier: 1.42.2
         version: 1.42.2
@@ -884,8 +884,8 @@ packages:
   '@formatjs/intl-localematcher@0.8.13':
     resolution: {integrity: sha512-kHEAFOkeJSPNi7c5PaKaRjxcBrJwzzt81ifUu+8uve1EDW/VJl83KsxmqgqNZLzcFEhSliZGvx3+pk/RH0IOmg==}
 
-  '@hoah2333/wikidot-lib@0.0.14':
-    resolution: {integrity: sha512-q9+zjwcGDcd3zdVtpmb/CAPeXTv7EJpchqFcgXVFtsIDrP/vXhbBcOHkM92o+qnVL4dp9L+hGZgDnO/yr/CfBQ==}
+  '@hoah2333/wikidot-lib@0.0.15':
+    resolution: {integrity: sha512-rO76PLb5RhWJi7fyPy8haEpd5PWRh6bgNfNZ2M261EvUSik9hyN87A6whpqQdugLFgu+9EVGNDgDFWogFawTNA==}
 
   '@img/colour@1.1.0':
     resolution: {integrity: sha512-Td76q7j57o/tLVdgS746cYARfSyxk8iEfRxewL9h4OMzYhbW4TAcppl0mT4eyqXddh6L/jwoM75mo7ixa/pCeQ==}
@@ -3689,7 +3689,7 @@ snapshots:
     dependencies:
       '@formatjs/fast-memoize': 3.1.7
 
-  '@hoah2333/wikidot-lib@0.0.14':
+  '@hoah2333/wikidot-lib@0.0.15':
     dependencies:
       cheerio: 1.2.0
       ts-pattern: 5.9.0
