@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { useGetUserInfo } from "@/app/lib/hooks/useGetUserInfo";
-
-import type { RefObject } from "react";
+import { usernameFromUserHref } from "./usernames";
 
 const showTab = (event: Event) => {
   if (!(event.target instanceof Element)) {
@@ -34,59 +32,33 @@ const showTab = (event: Event) => {
   }
 };
 
-const usernameFromUserHref = (href: string): string => {
-  return /\/user:info\/(?<username>[^/?#]+)/u.exec(href)?.groups?.username ?? "";
-};
-
-const usernamesIn = (html: string): string[] => {
-  const names = new Set<string>();
-  for (const match of html.matchAll(/href="\/user:info\/(?<username>[^"?#]+)"/gu)) {
-    const username = match.groups?.username ?? "";
+const applyUserLinks = (root: HTMLElement, userIds: Record<string, number>) => {
+  for (const link of root.querySelectorAll<HTMLAnchorElement>("a.wj-user-info-link")) {
+    const href = link.getAttribute("href") ?? "";
+    const username = usernameFromUserHref(href);
     if (username !== "") {
-      names.add(username);
+      if (href.startsWith("/")) {
+        link.href = `https://www.wikidot.com/${href}`;
+      }
+
+      const wikidotId = userIds[username];
+      const avatar = link.querySelector<HTMLImageElement>("img.wj-user-info-avatar");
+      if (wikidotId !== undefined && avatar !== null) {
+        avatar.src = `http://www.wikidot.com/avatar.php?userid=${wikidotId}`;
+      }
     }
   }
-  return [...names];
 };
 
-const UserInfoLink = ({
-  username,
-  html,
-  rootRef,
-}: {
-  username: string;
-  html: string;
-  rootRef: RefObject<HTMLDivElement | null>;
-}) => {
-  const userInfo = useGetUserInfo(username);
+export const Rules = ({ html, userIds }: { html: string; userIds: Record<string, number> }) => {
+  const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const root = rootRef.current;
-    if (root === null || html === "") {
-      return;
+    if (root !== null && html !== "") {
+      applyUserLinks(root, userIds);
     }
-
-    for (const link of root.querySelectorAll<HTMLAnchorElement>("a.wj-user-info-link")) {
-      const href = link.getAttribute("href") ?? "";
-      if (usernameFromUserHref(href) === username) {
-        if (href.startsWith("/")) {
-          link.href = `https://www.wikidot.com/${href}`;
-        }
-
-        const avatar = link.querySelector<HTMLImageElement>("img.wj-user-info-avatar");
-        if (userInfo !== null && avatar !== null) {
-          avatar.src = `http://www.wikidot.com/avatar.php?userid=${userInfo.wikidotId}`;
-        }
-      }
-    }
-  }, [html, rootRef, userInfo, username]);
-
-  return null;
-};
-
-export const Rules = ({ html }: { html: string }) => {
-  const rootRef = useRef<HTMLDivElement>(null);
-  const usernames = usernamesIn(html);
+  }, [html, userIds]);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -101,15 +73,10 @@ export const Rules = ({ html }: { html: string }) => {
   }, []);
 
   return (
-    <>
-      {usernames.map((username) => (
-        <UserInfoLink key={username} username={username} html={html} rootRef={rootRef} />
-      ))}
-      <div
-        ref={rootRef}
-        className="prose max-w-full text-white prose-invert"
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
-    </>
+    <div
+      ref={rootRef}
+      className="prose max-w-full text-white prose-invert"
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
   );
 };
