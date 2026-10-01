@@ -42,6 +42,7 @@ const FooterRight = async () => {
     "four_clovers",
     "woodenwolf",
     "Penrose Sowhat",
+    "DOG_Momizi",
   ] as const;
   return (
     <div className="flex flex-col gap-2">

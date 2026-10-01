@@ -24,6 +24,27 @@
   }
 }
 
+.wj-collapsible {
+  .wj-collapsible-button {
+    cursor: pointer;
+  }
+
+  .wj-collapsible-show-text {
+    display: inline-block;
+  }
+  .wj-collapsible-hide-text {
+    display: none;
+  }
+  &:open {
+    .wj-collapsible-show-text {
+      display: none;
+    }
+    .wj-collapsible-hide-text {
+      display: inline-block;
+    }
+  }
+}
+
 .wj-align-center {
   text-align: center;
 }
@@ -45,6 +66,7 @@
     bottom: 100%;
     left: 100%;
     background-color: var(--color-dark-bg);
+    border: 1px solid var(--color-border-1);
     padding: 0.5rem;
     max-width: 30rem;
     width: max-content;
