@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 
-const TAGS = ["2026电子游戏竞赛", "竞赛", "中心"] as const;
+const TAGS = ["2026电子游戏竞赛", "中心", "原创", "合著", "竞赛"] as const;
 
 export const Tags = async () => {
   const t = await getTranslations();
