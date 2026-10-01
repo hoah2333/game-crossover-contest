@@ -4,5 +4,4 @@ allowBuilds:
   sharp: true
   unrs-resolver: true
 minimumReleaseAgeExclude:
-  - '@hoah2333/wikidot-lib@0.0.14'
-  - '@vscode-ftml/ftml-wasm@1.42.2'
+  - "@hoah2333/wikidot-lib@0.0.15"
