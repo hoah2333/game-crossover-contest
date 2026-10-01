@@ -54,7 +54,7 @@ const TopBar = ({
   return (
     <>
       <div className="flex flex-col items-end justify-between lg:flex-row lg:items-start">
-        <div className="flex flex-wrap gap-4 text-sm">
+        <div className="flex flex-wrap gap-x-4 pl-1 text-sm xl:pl-0">
           {topNav.map((item: TopBarItem, index: number): JSX.Element => (
             <button
               key={`top-bar-item-${item.name}`}

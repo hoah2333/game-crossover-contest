@@ -11,7 +11,7 @@ export const Carousel = async () => {
   const carouselItems = await parseContestArticlesFtml();
   const items = shuffle(carouselItems, MAX_ITEMS);
   if (items.length === 0) {
-    return <div className="h-40" />;
+    return <div className="h-20 sm:h-40" />;
   }
   return <CarouselClient items={items} />;
 };

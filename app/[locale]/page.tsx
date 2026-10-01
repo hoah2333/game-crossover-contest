@@ -21,7 +21,7 @@ const IndexPage = ({ searchParams }: { searchParams: Promise<{ id: string }> }):
       <Header />
       <header className="absolute top-0">
         <div className="absolute top-0 z-3 w-full">
-          <div className="mx-auto flex w-full max-w-pc justify-between">
+          <div className="mx-auto flex w-full max-w-pc justify-between pl-14 xl:pl-0">
             <Logo className="text-white" />
             <Suspense fallback={null}>
               <LoginStatusSuspense searchParams={searchParams} />
@@ -31,7 +31,7 @@ const IndexPage = ({ searchParams }: { searchParams: Promise<{ id: string }> }):
         <div className="absolute top-0 left-0">
           <SideBar />
         </div>
-        <div className="mt-20">
+        <div className="mt-48 sm:mt-20">
           <BannerPicture />
         </div>
       </header>

@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 
 export const Footer = () => {
   return (
-    <div className="mt-4 flex w-full justify-center gap-40 bg-dark-bg py-10 text-text-dark">
+    <div className="mt-4 flex w-full flex-col items-center justify-center gap-10 bg-dark-bg py-10 text-text-dark lg:flex-row lg:items-start lg:gap-40">
       <FooterLeft />
       <FooterRight />
     </div>
