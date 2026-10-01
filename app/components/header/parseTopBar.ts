@@ -24,3 +24,24 @@ export const parseTopBar = (topNav: string): TopBarItem[] => {
     .toArray();
   return topBarItems;
 };
+
+export const parseMobileTopBar = (topNav: string): TopBarItem[] => {
+  const navDom: CheerioAPI = cheerLoad(topNav);
+  if (navDom("div.mobile-top-bar").length === 0) {
+    return [];
+  }
+  const topBarItems: TopBarItem[] = navDom("div.mobile-top-bar > ul > li")
+    .map((_, liElement: Element): TopBarItem => ({
+      name: navDom(liElement).text(),
+      children: navDom(liElement)
+        .next()
+        .find("li")
+        .map((__, innerLiElement: Element): TopBarItemChild => ({
+          name: navDom(innerLiElement).text(),
+          href: navDom(innerLiElement).find("a").attr("href") ?? "",
+        }))
+        .toArray(),
+    }))
+    .toArray();
+  return topBarItems;
+};

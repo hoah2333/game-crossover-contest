@@ -96,6 +96,8 @@ const NavBlock = ({ sideBlock }: { sideBlock: SideBarNavBlock }) => {
             <a
               className="w-full px-1 whitespace-nowrap transition-colors duration-200 hover:bg-white/30"
               href={link.href.startsWith("/") ? `${t("siteUrl")}${link.href}` : link.href}
+              target="_blank"
+              rel="noopener noreferrer"
               key={`${link.name}-${link.href}`}
             >
               {link.name}

@@ -11,7 +11,7 @@ export const LoginStatus = async ({ userId }: { userId: number }) => {
 
   return (
     <div className="text-sm text-text-dark">
-      <div className="flex items-start gap-2 bg-dark-bg/50 px-2 py-1">
+      <div className="flex items-start justify-end gap-2 bg-dark-bg/50 px-2 py-1">
         {userInfo === null ? (
           <>
             <a
@@ -46,13 +46,13 @@ export const LoginStatus = async ({ userId }: { userId: number }) => {
               </a>
             </div>
 
-            <div className="flex items-center border border-online">
+            <div className="flex size-10 items-center overflow-hidden border border-online">
               <Image
                 src={`http://www.wikidot.com/avatar.php?userid=${userInfo.wikidotId}`}
                 alt={`the Avatar of ${userInfo.displayName}`}
                 width={40}
                 height={40}
-                className="size-10"
+                className="size-full object-cover"
               />
             </div>
           </>

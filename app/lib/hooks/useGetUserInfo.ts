@@ -4,16 +4,43 @@ import { useEffect, useState } from "react";
 
 import type { UserInfoByUsername } from "@hoah2333/wikidot-lib";
 
+const userInfoCache = new Map<string, Promise<UserInfoByUsername | null>>();
+
+const loadUserInfo = (siteUrl: string, username: string): Promise<UserInfoByUsername | null> => {
+  const key = `${siteUrl}\n${username}`;
+  const cached = userInfoCache.get(key);
+  if (cached !== undefined) {
+    return cached;
+  }
+
+  const request = wdModule(siteUrl)
+    .getUserInfoByUsername(username)
+    .then(
+      (info) => info,
+      () => {
+        userInfoCache.delete(key);
+        return null;
+      },
+    );
+  userInfoCache.set(key, request);
+  return request;
+};
+
 export const useGetUserInfo = (username: string) => {
   const [userInfo, setUserInfo] = useState<UserInfoByUsername | null>(null);
-  const t = useTranslations();
+  const siteUrl = useTranslations()("siteUrl");
 
-  useEffect((): void => {
-    const site = wdModule(t("siteUrl"));
-    void site.getUserInfoByUsername(username).then((info: UserInfoByUsername | null): void => {
-      setUserInfo(info);
+  useEffect(() => {
+    let current = true;
+    void loadUserInfo(siteUrl, username).then((info) => {
+      if (current) {
+        setUserInfo(info);
+      }
     });
-  }, [username, t]);
+    return () => {
+      current = false;
+    };
+  }, [siteUrl, username]);
 
   return userInfo;
 };

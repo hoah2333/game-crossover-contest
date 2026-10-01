@@ -26,6 +26,11 @@
 
   --color-green-1: oklch(0.5472 0.1345 126.65);
   --color-green-1-hover: color-mix(in oklab, var(--color-green-1), white 10%);
+
+  --breakpoint-xs: 26rem;
+  --breakpoint-pc: 100rem;
+  --breakpoint-2xl: 120rem;
+  --breakpoint-3xl: 160rem;
 }
 
 body {

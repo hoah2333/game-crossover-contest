@@ -10,7 +10,7 @@ import type { JSX, KeyboardEvent } from "react";
 import type { DataState } from "@/app/types";
 import type { TopBarItem, TopBarItemChild, TopBar as TopBarType } from "./types";
 
-export const Header = ({ topNav }: { topNav: TopBarType }): JSX.Element => {
+export const Header = ({ topNav, mobileTopNav }: { topNav: TopBarType; mobileTopNav: TopBarType }): JSX.Element => {
   const [hoveringItem, setHoveringItem] = useState<number | null>(null);
 
   return (
@@ -24,7 +24,12 @@ export const Header = ({ topNav }: { topNav: TopBarType }): JSX.Element => {
       }}
     >
       <div className="mx-auto w-full max-w-pc text-white">
-        <TopBar hoveringItemState={[hoveringItem, setHoveringItem]} topNav={topNav} />
+        <div className="max-[580px]:hidden">
+          <TopBar hoveringItemState={[hoveringItem, setHoveringItem]} topNav={topNav} />
+        </div>
+        <div className="min-[580px]:hidden">
+          <TopBar hoveringItemState={[hoveringItem, setHoveringItem]} topNav={mobileTopNav} />
+        </div>
       </div>
     </div>
   );
@@ -53,8 +58,8 @@ const TopBar = ({
 
   return (
     <>
-      <div className="flex flex-col items-end justify-between lg:flex-row lg:items-start">
-        <div className="flex flex-wrap gap-x-4 pl-1 text-sm xl:pl-0">
+      <div className="flex flex-col items-end justify-between px-1 lg:flex-row lg:items-start">
+        <div className="flex flex-wrap gap-x-2 pl-1 text-sm lg:gap-x-4 xl:pl-0">
           {topNav.map((item: TopBarItem, index: number): JSX.Element => (
             <button
               key={`top-bar-item-${item.name}`}
@@ -63,7 +68,7 @@ const TopBar = ({
                 "group relative flex cursor-pointer items-center gap-1 py-3 transition-colors",
               )}
               onClick={(): void => {
-                setHoveringItem(index);
+                setHoveringItem((i) => (i === index ? null : index));
               }}
               tabIndex={0}
               onKeyDown={(event: KeyboardEvent<HTMLButtonElement>): void => {
@@ -81,11 +86,11 @@ const TopBar = ({
                   )}
                 />
               </span>
-              <ChevronDown size="14" className="transition-transform group-hover:translate-y-1" />
+              <ChevronDown size="14" className="hidden transition-transform group-hover:translate-y-1 xs:block" />
             </button>
           ))}
         </div>
-        <div className="flex flex-1 justify-end gap-2">
+        <div className="flex w-full flex-1 flex-col justify-end gap-2 md:w-auto md:flex-row">
           <SearchBar />
           <ReadingList />
         </div>
@@ -97,7 +102,7 @@ const TopBar = ({
         )}
         style={{ height: panelHeight }}
       >
-        <div ref={contentRef} className="mx-auto w-full max-w-pc columns-4 py-2">
+        <div ref={contentRef} className="mx-auto w-full max-w-pc columns-1 py-2 sm:columns-4">
           {hoveringItem !== null &&
             topNav[hoveringItem]?.children.map((child: TopBarItemChild): JSX.Element => (
               <a
@@ -119,9 +124,9 @@ const TopBar = ({
 const SearchBar = () => {
   const t = useTranslations();
   return (
-    <div className="my-1 flex shrink-0 text-sm">
+    <div className="my-1 flex shrink-0 justify-end text-sm">
       <input
-        className="w-80 border border-border-1 bg-dark-bg-2 p-2 placeholder:italic focus-within:border-blue-1 focus-visible:outline-none"
+        className="w-full max-w-80 border border-border-1 bg-dark-bg-2 p-2 placeholder:italic focus-within:border-blue-1 focus-visible:outline-none"
         name="search-bar"
         placeholder={t("searchBar.search")}
       />
@@ -142,7 +147,7 @@ const ReadingList = () => {
   const { readingList, removeFromReadingList } = useReadingList();
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="shrink-0">
+    <div className="flex shrink-0 justify-end">
       <button
         className="flex cursor-pointer items-center gap-1 px-2 py-3 transition-colors hover:bg-white/20"
         onClick={() => {

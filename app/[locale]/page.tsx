@@ -11,31 +11,32 @@ import { LowRating } from "@/app/components/low-rating";
 import { Recommend } from "@/app/components/recommend";
 import { Rules } from "@/app/components/rules";
 import { SideBar } from "@/app/components/side-bar";
+import { Tags } from "@/app/components/tags";
 
 import type { ReactElement } from "react";
 
 const IndexPage = ({ searchParams }: { searchParams: Promise<{ id: string }> }): ReactElement => {
   return (
     <div className="relative flex flex-col bg-page-bg">
-      <div className="z-2 h-20 w-full bg-header-bg" />
+      <div className="z-2 h-30 w-full bg-header-bg sm:h-20" />
       <Header />
-      <header className="absolute top-0">
-        <div className="absolute top-0 z-3 w-full">
-          <div className="mx-auto flex w-full max-w-pc justify-between pl-14 xl:pl-0">
+      <header className="absolute top-0 w-full">
+        <div className="absolute top-0 z-11 w-full">
+          <div className="mx-auto flex w-full max-w-pc flex-col-reverse justify-between pl-14 sm:flex-row xl:pl-0">
             <Logo className="text-white" />
             <Suspense fallback={null}>
               <LoginStatusSuspense searchParams={searchParams} />
             </Suspense>
           </div>
         </div>
-        <div className="absolute top-0 left-0">
+        <div className="absolute top-0 left-0 z-12">
           <SideBar />
         </div>
-        <div className="mt-48 sm:mt-20">
+        <div className="mt-70 w-full xs:mt-60 sm:mt-50 md:mt-40 lg:mt-30">
           <BannerPicture />
         </div>
       </header>
-      <main className="z-2 mx-auto mt-70 w-full max-w-pc sm:mt-110 lg:mt-110 xl:mt-160">
+      <main className="z-2 mx-auto mt-50 w-full max-w-pc xs:mt-70 sm:mt-90 lg:mt-90 xl:mt-120 pc:mt-120 2xl:mt-180 3xl:mt-240">
         <Suspense fallback={null}>
           <Carousel />
         </Suspense>
@@ -51,6 +52,7 @@ const IndexPage = ({ searchParams }: { searchParams: Promise<{ id: string }> }):
         <Suspense fallback={null}>
           <Rules />
         </Suspense>
+        <Tags />
       </main>
       <footer>
         <Footer />

@@ -110,13 +110,30 @@
 }
 
 .wj-table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+
+  tbody {
+    display: table;
+    width: max-content;
+    min-width: 100%;
+    border-collapse: collapse;
+
+    @media screen and (min-width: 1024px) {
+      width: 100%;
+    }
+  }
+
   td,
   th {
     padding: 0.5rem 1rem;
     border: 1px solid var(--color-border-1);
+    max-width: 26rem;
   }
   th {
     text-align: center;
+    white-space: nowrap;
     background-color: var(--color-dark-bg-2);
   }
   td {
@@ -143,6 +160,8 @@
 }
 
 .prose {
+  padding: 0 1rem;
+
   h1 {
     font-size: 2rem;
     margin-top: 1rem;
