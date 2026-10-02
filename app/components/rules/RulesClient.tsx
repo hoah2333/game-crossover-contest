@@ -34,6 +34,9 @@ const showTab = (event: Event) => {
 
 const applyUserLinks = (root: HTMLElement, userIds: Record<string, number>) => {
   for (const link of root.querySelectorAll<HTMLAnchorElement>("a.wj-user-info-link")) {
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+
     const href = link.getAttribute("href") ?? "";
     const username = usernameFromUserHref(href);
     if (username !== "") {
