@@ -181,6 +181,10 @@
   }
 }
 
+.sponser {
+  display: none;
+}
+
 .prose {
   padding: 0 1rem;
 

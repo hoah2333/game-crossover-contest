@@ -1,24 +1,10 @@
 import "./rules.css";
 
-import content from "./rules.ftml";
-
 import { wdModule } from "@hoah2333/wikidot-lib";
 import { cacheLife } from "next/cache";
-import { parseFtml } from "@/app/lib/ftml";
-import { getSourceFtml } from "@/app/lib/getSourceFtml";
+import { getCachedPageHtml, registerPage, registerSite, rulesPage } from "@/app/lib/getCachedPageHtml";
 import { Rules as RulesClient } from "./RulesClient";
 import { usernamesIn } from "./usernames";
-
-const registerPage = "fragment:2026-game-crossover-contest-register";
-const registerSite = "https://scp-wiki-cn.wikidot.com";
-
-const getRegisterTable = async () => {
-  "use cache";
-  cacheLife({ stale: 60, revalidate: 300, expire: 3600 });
-
-  const registerFtml = await getSourceFtml(registerPage, registerSite);
-  return parseFtml(registerFtml);
-};
 
 const getCachedUserId = async (username: string, siteUrl: string): Promise<number | null> => {
   "use cache";
@@ -32,7 +18,7 @@ const getCachedUserId = async (username: string, siteUrl: string): Promise<numbe
 };
 
 export const Rules = async () => {
-  const [rules, registerTable] = await Promise.all([parseFtml(content), getRegisterTable()]);
+  const [rules, registerTable] = await Promise.all([getCachedPageHtml(rulesPage), getCachedPageHtml(registerPage)]);
   const html = rules.replace('<div id="register-table"></div>', registerTable);
   const entries = await Promise.all(
     usernamesIn(html).map(async (username) => {

@@ -1,5 +1,7 @@
+import { load as cheerLoad } from "cheerio";
 import { getTranslations } from "next-intl/server";
 import { Logo } from "@/app/components/logo";
+import { getCachedPageHtml, rulesPage } from "@/app/lib/getCachedPageHtml";
 
 import type { ReactNode } from "react";
 
@@ -33,20 +35,20 @@ const licenceLink = (chunks: ReactNode) => (
   </a>
 );
 
+const sponsersIn = (html: string): string[] => {
+  const dom = cheerLoad(html);
+  const block = dom("div.sponser");
+  block.find("br").replaceWith("\n");
+  return block
+    .text()
+    .split("\n")
+    .map((name) => name.trim())
+    .filter((name) => name !== "");
+};
+
 const FooterRight = async () => {
   const t = await getTranslations("footer");
-  const sponsers = [
-    "SisterTan_Greasy",
-    "Kcorena",
-    "ColorlessL",
-    "four_clovers",
-    "woodenwolf",
-    "Penrose Sowhat",
-    "DOG_Momizi",
-    "HiloHiroa",
-    "Zhong XY",
-    "HERE IS A BUTTERFLY",
-  ] as const;
+  const sponsers = sponsersIn(await getCachedPageHtml(rulesPage));
   return (
     <div className="flex flex-col gap-2">
       <div>{t("sponsers")}</div>
