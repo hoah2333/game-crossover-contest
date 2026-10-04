@@ -1,18 +1,20 @@
 import { load as cheerLoad } from "cheerio";
 import { getTranslations } from "next-intl/server";
+import { connection } from "next/server";
+import { Suspense } from "react";
 import { Logo } from "@/app/components/logo";
 import { getCachedPageHtml, rulesPage } from "@/app/lib/getCachedPageHtml";
 
 import type { ReactNode } from "react";
 
-export const Footer = () => {
-  return (
-    <div className="mt-4 flex w-full flex-col items-center justify-center gap-10 bg-dark-bg py-10 text-text-dark lg:flex-row lg:items-start lg:gap-40">
-      <FooterLeft />
+export const Footer = () => (
+  <div className="mt-4 flex w-full flex-col items-center justify-center gap-10 bg-dark-bg py-10 text-text-dark lg:flex-row lg:items-start lg:gap-40">
+    <FooterLeft />
+    <Suspense fallback={null}>
       <FooterRight />
-    </div>
-  );
-};
+    </Suspense>
+  </div>
+);
 
 const FooterLeft = async () => {
   const t = await getTranslations("footer");
@@ -47,6 +49,7 @@ const sponsersIn = (html: string): string[] => {
 };
 
 const FooterRight = async () => {
+  await connection();
   const t = await getTranslations("footer");
   const sponsers = sponsersIn(await getCachedPageHtml(rulesPage));
   return (
