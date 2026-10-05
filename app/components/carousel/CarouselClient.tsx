@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { RatingTexts } from "@/app/components/rating/RatingTexts";
+import { getVisibleTags } from "@/app/lib/getVisibleTags";
 import { useReadingList } from "@/app/lib/hooks/useReadingList";
 import { CarouselFrame } from "./CarouselFrame";
 
@@ -71,18 +72,20 @@ const CarouselCard = ({ item }: { item: ArticleItem }) => {
               postDate={item.postDate}
             />
             <div className="flex flex-wrap gap-2 text-sm">
-              {item.tags.slice(0, 10).map((tag) => (
-                <a
-                  className="cursor-pointer bg-white/10 p-1 transition-colors hover:bg-white/20"
-                  href={`${t("siteUrl")}/system:page-tags/tag/${tag}#pages`}
-                  key={tag}
-                >
-                  {tag}
-                </a>
-              ))}
-              {item.tags.length > 10 && (
+              {getVisibleTags(item.tags)
+                .slice(0, 10)
+                .map((tag) => (
+                  <a
+                    className="cursor-pointer bg-white/10 p-1 transition-colors hover:bg-white/20"
+                    href={`${t("siteUrl")}/system:page-tags/tag/${tag}#pages`}
+                    key={tag}
+                  >
+                    {tag}
+                  </a>
+                ))}
+              {getVisibleTags(item.tags).length > 10 && (
                 <span className="bg-white/10 p-1">
-                  {t("carousel.additionalTags", { count: item.tags.length - 10 })}
+                  {t("carousel.additionalTags", { count: getVisibleTags(item.tags).length - 10 })}
                 </span>
               )}
             </div>

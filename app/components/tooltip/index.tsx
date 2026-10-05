@@ -19,6 +19,7 @@ import { useTranslations } from "next-intl";
 import { useRef, useState } from "react";
 import { RatingTexts } from "@/app/components/rating/RatingTexts";
 import { getDate } from "@/app/lib/getDate";
+import { getVisibleTags } from "@/app/lib/getVisibleTags";
 
 import type { ReactNode } from "react";
 import type { ArticleItem } from "@/app/lib/types";
@@ -111,8 +112,3 @@ export const Tooltip = ({ children, articleItem }: { children: ReactNode; articl
     </div>
   );
 };
-
-const getVisibleTags = (tags: string[]) =>
-  tags.filter(
-    (tag) => !(tag.startsWith("_") || ["2026电子游戏竞赛", "crossover项目", "原创", "合著", "故事"].includes(tag)),
-  );
