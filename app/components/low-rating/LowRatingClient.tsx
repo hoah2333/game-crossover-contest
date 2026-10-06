@@ -38,6 +38,7 @@ const LowRatingCard = ({ item }: { item: ArticleItem }) => {
           className="aspect-video w-full shrink-0 overflow-hidden"
         >
           <Image
+            unoptimized
             className="size-full object-cover"
             src={bannerImage}
             alt={item.title}

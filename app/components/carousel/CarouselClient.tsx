@@ -46,6 +46,7 @@ const CarouselCard = ({ item }: { item: ArticleItem }) => {
       <div className="group relative aspect-5/6 overflow-hidden">
         <a className="cursor-pointer" href={`${t("siteUrl")}/${item.slug}`} target="_blank" rel="noopener noreferrer">
           <Image
+            unoptimized
             className="object-cover"
             src={item.carouselBanner === "" ? "/no-image-5.6.png" : item.carouselBanner}
             alt={item.title}

@@ -117,7 +117,7 @@ const MediaBlock = ({ sideBlock }: { sideBlock: SideBarMediaBlock }) => (
     <div className="mt-2 flex justify-center gap-2">
       {sideBlock.links.map((link) => (
         <a href={link.href} target="_blank" rel="noopener noreferrer" key={`${link.src}-${link.href}`}>
-          <Image src={link.src} width={30} height={30} alt={link.alt} className="w-auto" />
+          <Image unoptimized src={link.src} width={30} height={30} alt={link.alt} className="w-auto" />
         </a>
       ))}
     </div>
@@ -127,7 +127,7 @@ const MediaBlock = ({ sideBlock }: { sideBlock: SideBarMediaBlock }) => (
 const LicenseBlock = ({ sideBlock }: { sideBlock: SideBarLicenseBlock }) => (
   <div className="flex flex-col items-center">
     <a href={sideBlock.image.href} target="_blank" rel="noopener noreferrer">
-      <Image src={sideBlock.image.src} width={120} height={42} alt={sideBlock.image.alt} />
+      <Image unoptimized src={sideBlock.image.src} width={120} height={42} alt={sideBlock.image.alt} />
     </a>
     <div>{sideBlock.text}</div>
     <div>

@@ -121,6 +121,7 @@ const ContestListRow = ({
     >
       <div className="aspect-8/3 w-full shrink-0 overflow-hidden md:w-60">
         <Image
+          unoptimized
           className="size-full object-cover"
           src={articleItem.contestListBanner === "" ? "/no-image-8.3.png" : articleItem.contestListBanner}
           alt={articleItem.title}
@@ -208,7 +209,7 @@ const ContestListPanel = ({ articleItem }: { articleItem: ArticleItem }) => {
       </button>
       <div>
         {articleItem.images.map((i) => (
-          <Image src={i} alt={articleItem.title} sizes="328px" width={328} height={123} key={i} />
+          <Image unoptimized src={i} alt={articleItem.title} sizes="328px" width={328} height={123} key={i} />
         ))}
       </div>
     </div>

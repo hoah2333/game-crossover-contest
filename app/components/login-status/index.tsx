@@ -48,6 +48,7 @@ export const LoginStatus = async ({ userId }: { userId: number }) => {
 
             <div className="flex size-10 items-center overflow-hidden border border-online">
               <Image
+                unoptimized
                 src={`http://www.wikidot.com/avatar.php?userid=${userInfo.wikidotId}`}
                 alt={`the Avatar of ${userInfo.displayName}`}
                 width={40}

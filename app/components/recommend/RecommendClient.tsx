@@ -43,6 +43,7 @@ const RecommendCard = ({ item }: { item: RecommendItem }) => {
             className="aspect-video w-full shrink-0 overflow-hidden lg:basis-1/2"
           >
             <Image
+              unoptimized
               className="size-full object-cover"
               src={bannerImage}
               alt={item.article.title}
@@ -74,6 +75,7 @@ const RecommendCard = ({ item }: { item: RecommendItem }) => {
             <div className="flex gap-2 text-text-dark">
               {recommender && (
                 <Image
+                  unoptimized
                   src={`http://www.wikidot.com/avatar.php?userid=${recommender.wikidotId}`}
                   alt={`the Avatar of ${recommender.displayName}`}
                   width={40}
