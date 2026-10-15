@@ -38,6 +38,7 @@ export const CarouselClient = ({ items }: { items: ArticleItem[] }) => {
 
 const CarouselCard = ({ item }: { item: ArticleItem }) => {
   const t = useTranslations();
+  const visibleTags = getVisibleTags(item.tags, t("hiddenTags"));
 
   const { isInReadingList, addToReadingList, removeFromReadingList } = useReadingList();
 
@@ -73,20 +74,18 @@ const CarouselCard = ({ item }: { item: ArticleItem }) => {
               postDate={item.postDate}
             />
             <div className="flex flex-wrap gap-2 text-sm">
-              {getVisibleTags(item.tags)
-                .slice(0, 10)
-                .map((tag) => (
-                  <a
-                    className="cursor-pointer bg-white/10 p-1 transition-colors hover:bg-white/20"
-                    href={`${t("siteUrl")}/system:page-tags/tag/${tag}#pages`}
-                    key={tag}
-                  >
-                    {tag}
-                  </a>
-                ))}
-              {getVisibleTags(item.tags).length > 10 && (
+              {visibleTags.slice(0, 10).map((tag) => (
+                <a
+                  className="cursor-pointer bg-white/10 p-1 transition-colors hover:bg-white/20"
+                  href={`${t("siteUrl")}/system:page-tags/tag/${tag}#pages`}
+                  key={tag}
+                >
+                  {tag}
+                </a>
+              ))}
+              {visibleTags.length > 10 && (
                 <span className="bg-white/10 p-1">
-                  {t("carousel.additionalTags", { count: getVisibleTags(item.tags).length - 10 })}
+                  {t("carousel.additionalTags", { count: visibleTags.length - 10 })}
                 </span>
               )}
             </div>

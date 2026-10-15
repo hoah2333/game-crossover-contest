@@ -27,6 +27,7 @@ import type { ArticleItem } from "@/app/lib/types";
 export const Tooltip = ({ children, articleItem }: { children: ReactNode; articleItem: ArticleItem }) => {
   const locale = useLocale();
   const t = useTranslations();
+  const visibleTags = getVisibleTags(articleItem.tags, t("hiddenTags"));
 
   const [open, setOpen] = useState(false);
   const arrowRef = useRef<SVGSVGElement>(null);
@@ -82,20 +83,18 @@ export const Tooltip = ({ children, articleItem }: { children: ReactNode; articl
                 />
               </div>
               <div className="flex flex-wrap gap-2 text-sm">
-                {getVisibleTags(articleItem.tags)
-                  .slice(0, 10)
-                  .map((tag) => (
-                    <a
-                      className="cursor-pointer bg-white/10 p-1 transition-colors hover:bg-white/20"
-                      href={`${t("siteUrl")}/system:page-tags/tag/${tag}#pages`}
-                      key={tag}
-                    >
-                      {tag}
-                    </a>
-                  ))}
-                {getVisibleTags(articleItem.tags).length > 10 && (
+                {visibleTags.slice(0, 10).map((tag) => (
+                  <a
+                    className="cursor-pointer bg-white/10 p-1 transition-colors hover:bg-white/20"
+                    href={`${t("siteUrl")}/system:page-tags/tag/${tag}#pages`}
+                    key={tag}
+                  >
+                    {tag}
+                  </a>
+                ))}
+                {visibleTags.length > 10 && (
                   <span className="bg-white/10 p-1">
-                    {t("carousel.additionalTags", { count: getVisibleTags(articleItem.tags).length - 10 })}
+                    {t("carousel.additionalTags", { count: visibleTags.length - 10 })}
                   </span>
                 )}
               </div>

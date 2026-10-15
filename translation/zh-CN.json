@@ -4,6 +4,10 @@
   "scp": { "name": "SCP Foundation", "desciption": "Secure · Contain · Protect" },
   "searchBar": { "search": "搜索" },
   "fetchTags": "+2026电子游戏竞赛 -竞赛 -中心",
+  "trackTags": { "scifi": "_2026电竞科幻", "fantasy": "_2026电竞奇幻", "magic": "_2026电竞魔幻" },
+  "hiddenTags": "2026电子游戏竞赛 crossover项目 原创 合著 故事",
+  "pageTags": "2026电子游戏竞赛 中心 原创 合著 竞赛",
+  "pageTagsLabel": "标签：",
   "loginStatus": {
     "activity": "活动",
     "messages": "消息",

@@ -1,4 +1,6 @@
-export const getVisibleTags = (tags: string[]) =>
-  tags.filter(
-    (tag) => !(tag.startsWith("_") || ["2026电子游戏竞赛", "crossover项目", "原创", "合著", "故事"].includes(tag)),
-  );
+export const splitTags = (value: string) => value.split(" ").filter((tag) => tag !== "");
+
+export const getVisibleTags = (tags: string[], hiddenTags: string) => {
+  const hidden = splitTags(hiddenTags);
+  return tags.filter((tag) => !(tag.startsWith("_") || hidden.includes(tag)));
+};

@@ -1,14 +1,13 @@
 import { getTranslations } from "next-intl/server";
-
-const TAGS = ["2026电子游戏竞赛", "中心", "原创", "合著", "竞赛"] as const;
+import { splitTags } from "@/app/lib/getVisibleTags";
 
 export const Tags = async () => {
   const t = await getTranslations();
 
   return (
     <p className="mt-4 text-sm text-white">
-      标签：
-      {TAGS.map((tag) => (
+      {t("pageTagsLabel")}
+      {splitTags(t("pageTags")).map((tag) => (
         <a
           className="mr-2 hover:underline"
           href={`${t("siteUrl")}/system:page-tags/tag/${tag}`}

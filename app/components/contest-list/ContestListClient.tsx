@@ -136,7 +136,7 @@ const ContestListRow = ({
           <div>
             <div className="truncate text-lg">{articleItem.title}</div>
             <div className="flex h-6 flex-wrap gap-2 overflow-hidden text-sm">
-              {getVisibleTags(articleItem.tags).map((tag) => (
+              {getVisibleTags(articleItem.tags, t("hiddenTags")).map((tag) => (
                 <span key={tag} className="shrink-0">
                   {tag}
                 </span>
@@ -159,6 +159,7 @@ const ContestListRow = ({
 
 const ContestListPanel = ({ articleItem }: { articleItem: ArticleItem }) => {
   const t = useTranslations();
+  const visibleTags = getVisibleTags(articleItem.tags, t("hiddenTags"));
   const { isInReadingList, addToReadingList, removeFromReadingList } = useReadingList();
   return (
     <div className="flex flex-col gap-2">
@@ -179,21 +180,17 @@ const ContestListPanel = ({ articleItem }: { articleItem: ArticleItem }) => {
         />
       </div>
       <div className="flex flex-wrap gap-2 text-sm">
-        {getVisibleTags(articleItem.tags)
-          .slice(0, 10)
-          .map((tag) => (
-            <a
-              className="cursor-pointer bg-white/10 p-1 transition-colors hover:bg-white/20"
-              href={`${t("siteUrl")}/system:page-tags/tag/${tag}#pages`}
-              key={tag}
-            >
-              {tag}
-            </a>
-          ))}
-        {getVisibleTags(articleItem.tags).length > 10 && (
-          <span className="bg-white/10 p-1">
-            {t("carousel.additionalTags", { count: getVisibleTags(articleItem.tags).length - 10 })}
-          </span>
+        {visibleTags.slice(0, 10).map((tag) => (
+          <a
+            className="cursor-pointer bg-white/10 p-1 transition-colors hover:bg-white/20"
+            href={`${t("siteUrl")}/system:page-tags/tag/${tag}#pages`}
+            key={tag}
+          >
+            {tag}
+          </a>
+        ))}
+        {visibleTags.length > 10 && (
+          <span className="bg-white/10 p-1">{t("carousel.additionalTags", { count: visibleTags.length - 10 })}</span>
         )}
       </div>
       <button
