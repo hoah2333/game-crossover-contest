@@ -43,3 +43,5 @@ pnpm dev
 ```
 
 所有操作完成后，应可以在开发服务器的 [http://localhost:3000/en](http://localhost:3000/en) 预览你的翻译文本。
+
+网站本体翻译完成后，也请记得将[规则](https://scp-wiki-cn.wikidot.com/fragment:2026-game-crossover-contest-rules)与[报名表](https://scp-wiki-cn.wikidot.com/fragment:2026-game-crossover-contest-register)进行对应的翻译。
