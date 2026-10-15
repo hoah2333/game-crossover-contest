@@ -15,7 +15,7 @@ import {
   useTransitionStyles,
 } from "@floating-ui/react";
 import { clsx } from "clsx";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useRef, useState } from "react";
 import { RatingTexts } from "@/app/components/rating/RatingTexts";
 import { getDate } from "@/app/lib/getDate";
@@ -25,6 +25,7 @@ import type { ReactNode } from "react";
 import type { ArticleItem } from "@/app/lib/types";
 
 export const Tooltip = ({ children, articleItem }: { children: ReactNode; articleItem: ArticleItem }) => {
+  const locale = useLocale();
   const t = useTranslations();
 
   const [open, setOpen] = useState(false);
@@ -69,7 +70,9 @@ export const Tooltip = ({ children, articleItem }: { children: ReactNode; articl
             <FloatingArrow className="fill-dark-bg-2" ref={arrowRef} context={context} />
             <div className="flex flex-col gap-2 px-4 py-2">
               <div className="text-lg">{articleItem.title}</div>
-              <div className="text-sm text-text-dark">{t("contestList.date", getDate(articleItem.postDate))}</div>
+              <div className="text-sm text-text-dark">
+                {t("contestList.date", getDate(articleItem.postDate, locale))}
+              </div>
               <div className="flex flex-col bg-dark-bg p-2 text-sm text-text-dark">
                 <div>{t("contestList.overall")}</div>
                 <RatingTexts

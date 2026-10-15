@@ -1,9 +1,10 @@
 import "./rules.css";
 
 import { wdModule } from "@hoah2333/wikidot-lib";
+import { getTranslations } from "next-intl/server";
 import { cacheLife } from "next/cache";
 import { connection } from "next/server";
-import { getCachedPageHtml, registerPage, registerSite, rulesPage } from "@/app/lib/getCachedPageHtml";
+import { getCachedPageHtml, registerPage, rulesPage } from "@/app/lib/getCachedPageHtml";
 import { Rules as RulesClient } from "./RulesClient";
 import { usernamesIn } from "./usernames";
 
@@ -55,9 +56,14 @@ const getUserIds = async (usernames: string[], siteUrl: string): Promise<Record<
 
 export const Rules = async () => {
   await connection();
-  const [rules, registerTable] = await Promise.all([getCachedPageHtml(rulesPage), getCachedPageHtml(registerPage)]);
+  const t = await getTranslations();
+  const siteUrl = t("siteUrl");
+  const [rules, registerTable] = await Promise.all([
+    getCachedPageHtml(rulesPage, siteUrl),
+    getCachedPageHtml(registerPage, siteUrl),
+  ]);
   const html = rules.replace('<div id="register-table"></div>', registerTable);
-  const userIds = await getUserIds(usernamesIn(html), registerSite);
+  const userIds = await getUserIds(usernamesIn(html), siteUrl);
 
   return <RulesClient html={html} userIds={userIds} />;
 };

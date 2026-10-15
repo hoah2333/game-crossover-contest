@@ -3,7 +3,7 @@
 import Image from "next/image";
 
 import { clsx } from "clsx";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { RatingTexts } from "@/app/components/rating/RatingTexts";
 import { getDate } from "@/app/lib/getDate";
@@ -105,6 +105,7 @@ const ContestListRow = ({
   isSelected: boolean;
   onSelect: () => void;
 }) => {
+  const locale = useLocale();
   const t = useTranslations();
 
   return (
@@ -142,7 +143,7 @@ const ContestListRow = ({
               ))}
             </div>
           </div>
-          <div className="text-sm text-text-dark">{t("contestList.date", getDate(articleItem.postDate))}</div>
+          <div className="text-sm text-text-dark">{t("contestList.date", getDate(articleItem.postDate, locale))}</div>
         </div>
         <div className="flex shrink-0 items-end justify-end px-4 py-2 text-right text-sm text-white">
           {t("carousel.createdBy", {

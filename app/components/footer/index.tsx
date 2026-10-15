@@ -50,11 +50,12 @@ const sponsersIn = (html: string): string[] => {
 
 const FooterRight = async () => {
   await connection();
-  const t = await getTranslations("footer");
-  const sponsers = sponsersIn(await getCachedPageHtml(rulesPage));
+  const t = await getTranslations();
+  const siteUrl = t("siteUrl");
+  const sponsers = sponsersIn(await getCachedPageHtml(rulesPage, siteUrl));
   return (
     <div className="flex flex-col gap-2">
-      <div>{t("sponsers")}</div>
+      <div>{t("footer.sponsers")}</div>
       <div className="columns-2 sm:columns-4">
         {sponsers.map((sponser) => (
           <a

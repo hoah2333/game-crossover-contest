@@ -3,6 +3,7 @@
   "title": { "contestName": "2026 电子游戏竞赛" },
   "scp": { "name": "SCP Foundation", "desciption": "Secure · Contain · Protect" },
   "searchBar": { "search": "搜索" },
+  "fetchTags": "+2026电子游戏竞赛 -竞赛 -中心",
   "loginStatus": {
     "activity": "活动",
     "messages": "消息",

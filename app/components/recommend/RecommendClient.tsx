@@ -3,7 +3,7 @@
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { match, P } from "ts-pattern";
 import { CarouselFrame } from "@/app/components/carousel/CarouselFrame";
 import { Tooltip } from "@/app/components/tooltip";
@@ -25,6 +25,7 @@ export const RecommendClient = ({ items }: { items: RecommendItem[] }) => {
 };
 
 const RecommendCard = ({ item }: { item: RecommendItem }) => {
+  const locale = useLocale();
   const t = useTranslations();
   const recommender = item.review.createdBy;
   const bannerImage = match(item.article.images[0])
@@ -87,7 +88,7 @@ const RecommendCard = ({ item }: { item: RecommendItem }) => {
                 <div className="font-bold text-white">
                   {recommender === null ? t("recommend.unknownUser") : recommender.displayName}
                 </div>
-                <div className="text-sm">{t("contestList.date", getDate(item.review.createdAt))}</div>
+                <div className="text-sm">{t("contestList.date", getDate(item.review.createdAt, locale))}</div>
               </div>
             </div>
           </div>
