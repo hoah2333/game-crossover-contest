@@ -36,11 +36,13 @@
     display: none;
   }
   &:open {
-    .wj-collapsible-show-text {
-      display: none;
-    }
-    .wj-collapsible-hide-text {
-      display: inline-block;
+    > .wj-collapsible-button {
+      .wj-collapsible-show-text {
+        display: none;
+      }
+      .wj-collapsible-hide-text {
+        display: inline-block;
+      }
     }
   }
 }
@@ -161,6 +163,14 @@
   td {
     background-color: var(--color-dark-bg);
   }
+}
+
+.wj-align-left {
+  text-align: left;
+}
+
+.wj-align-right {
+  text-align: right;
 }
 
 .wj-footnote-list {
