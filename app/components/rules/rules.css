@@ -13,8 +13,8 @@
     .wj-user-info-avatar {
       margin-top: 0;
       margin-bottom: 0;
-      width: 1rem;
-      height: 1rem;
+      width: 1em;
+      height: 1em;
       object-fit: cover;
     }
 
