@@ -193,6 +193,29 @@
     margin-top: 1rem;
     color: var(--color-blue-3);
   }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--color-blue-3);
+  }
+
+  blockquote,
+  div.blockquote {
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid #56707f;
+    border-radius: 3px;
+    padding: 12px;
+    margin: 8px;
+
+    .best & {
+      width: 60%;
+      margin: 8px auto;
+    }
+  }
+
   ul {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
